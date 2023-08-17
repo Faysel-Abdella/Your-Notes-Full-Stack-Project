@@ -30,6 +30,7 @@ html {
   --small-text-color: #9495a5;
   --white-color: #fff;
   --normal-color: #697386;
+  --complete-task-color: #d1d2da;
 
   /* Backgrounds */
   --primary-background: #fafafa;
@@ -135,6 +136,7 @@ label {
 button {
   border: none;
   cursor: pointer;
+  background: transparent;
 }
 
 input {
