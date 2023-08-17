@@ -19,7 +19,9 @@ const TasksPage = () => {
           </button>
         </form>
 
-        <div></div>
+        <div className="tasks">
+          <Tasks />
+        </div>
       </div>
     </Wrapper>
   );

@@ -3,11 +3,12 @@ import { styled } from "styled-components";
 const Wrapper = styled.section`
   display: flex;
   justify-content: center;
-  margin-top: -10rem;
+  margin-top: -13rem;
   .tasks-container {
   }
   .add-bar {
     position: relative;
+    margin-bottom: 2.4rem;
   }
   .add-input {
     width: 540px;
@@ -27,6 +28,10 @@ const Wrapper = styled.section`
     right: 10px;
     font-size: var(--large-text);
     color: var(--small-text-color);
+  }
+
+  .tasks {
+    box-shadow: var(--task-shadow);
   }
 `;
 
