@@ -7,6 +7,7 @@ const Wrapper = styled.section`
   .tasks-container {
   }
   .add-bar {
+    position: relative;
   }
   .add-input {
     width: 540px;
@@ -20,6 +21,12 @@ const Wrapper = styled.section`
     padding-left: 3rem;
   }
   .add-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    font-size: var(--large-text);
+    color: var(--small-text-color);
   }
 `;
 

@@ -8,14 +8,16 @@ const TasksPage = () => {
   return (
     <Wrapper>
       <div className="tasks-container">
-        <div className="add-bar">
+        <form className="add-bar">
           <input
             type="text"
             placeholder="Create a new todo.."
             className="add-input"
           />
-          <AiOutlinePlusCircle className="add-btn" />
-        </div>
+          <button>
+            <AiOutlinePlusCircle className="add-btn" />
+          </button>
+        </form>
 
         <div></div>
       </div>
