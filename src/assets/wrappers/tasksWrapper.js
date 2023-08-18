@@ -73,12 +73,12 @@ const Wrapper = styled.section`
 
   .additional-info {
     padding: 20px 24px 15px 24px;
-    color: var(--small-text-color);
+    color: var(--filter-btn-color);
     font-size: var(--small-text);
     display: flex;
     justify-content: space-between;
     button {
-      color: var(--small-text-color);
+      color: var(--filter-btn-color);
       font-size: var(--small-text);
       font-family: inherit;
     }

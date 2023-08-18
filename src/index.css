@@ -32,6 +32,8 @@ html {
   --normal-color: #697386;
   --complete-task-color: #d1d2da;
 
+  --filter-btn-color: (--small-text-color);
+
   /* Backgrounds */
   --primary-background: #fafafa;
   /* --secondary-background is background of  the task container and background of login and singup */
@@ -63,6 +65,8 @@ body {
   --white-color: #fff;
 
   --hover-color: #aa3780;
+
+  --filter-btn-color: #e3e4f1;
 
   --background-color: #241229;
   --primary-background: #241229;
