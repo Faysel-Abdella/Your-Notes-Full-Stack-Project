@@ -17,8 +17,8 @@ const Wrapper = styled.section`
     background: var(--secondary-background);
     box-shadow: var(--task-shadow);
     font-family: inherit;
-    font-size: var(--medium-text);
-    color: var(--small-text-color);
+    font-size: var(--large-medium-text);
+    color: var(--task-color);
     padding-left: 3rem;
   }
   .add-btn {

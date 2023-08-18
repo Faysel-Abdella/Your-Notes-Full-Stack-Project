@@ -27,7 +27,7 @@ const Tasks = () => {
             <p className="task-text">do one task</p>
 
             <button className="cancel">
-              <img src={cancel} alt="" />
+              <img src={cancel} alt="" className="cancel-img" />
             </button>
           </div>
         ))}

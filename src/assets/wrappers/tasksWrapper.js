@@ -68,7 +68,16 @@ const Wrapper = styled.section`
   }
 
   .cancel {
+    transition: all 0.2s ease-out;
+  }
+  .cancel:hover {
+    margin-top: -5px;
+  }
+
+  .cancel,
+  .cancel:active {
     margin-left: auto;
+    border: none;
   }
 
   .additional-info {

@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 
 import ProfileNavBar from "./ProfileNavBar";
 
@@ -10,42 +10,82 @@ import dark from "../assets/images/dark.svg";
 import sun from "../assets/images/sun.svg";
 import backgroundImage from "../assets/images/dashboardcover.png";
 
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "toggle lang":
-      return {
-        showNav: state.showNav,
-        isArabic: !state.isArabic,
-        isDark: state.isDark,
-      };
-    case "toggle nav":
-      console.log(state.showNav);
-      return {
-        showNav: !state.showNav,
-        isArabic: state.isArabic,
-        isDark: state.isDark,
-      };
-    case "toggle dark":
-      return {
-        showNav: state.showNav,
-        isArabic: state.isArabic,
-        isDark: !state.isDark,
-      };
-    default:
-      return state;
-  }
-};
-
 const Dashboard = ({ isDarkThemeEnabled }) => {
   const initialState = {
     showNav: false,
     isArabic: false,
     isDark: isDarkThemeEnabled,
   };
+
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case "toggle lang":
+        return {
+          showNav: state.showNav,
+          isArabic: !state.isArabic,
+          isDark: state.isDark,
+        };
+      case "toggle nav":
+        console.log(state.showNav);
+        return {
+          showNav: !state.showNav,
+          isArabic: state.isArabic,
+          isDark: state.isDark,
+        };
+      case "toggle dark":
+        return {
+          showNav: state.showNav,
+          isArabic: state.isArabic,
+          isDark: !state.isDark,
+        };
+      default:
+        return state;
+    }
+  };
+
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  document.body.classList.toggle("dark-theme", state.isDark);
-  localStorage.setItem("darkTheme", state.isDark);
+  // const toggleDark = () => {
+  //   console.log(state.isDark);
+  //   dispatch({ type: "toggle dark" });
+  //   document.body.classList.toggle("dark-theme", state.isDark);
+  //   localStorage.setItem("darkTheme", state.isDark);
+  //   console.log(state.isDark);
+  // };
+
+  // const [isDarkTheme, setIsDarkTheme] = useState(isDarkThemeEnabled);
+
+  // useEffect(() => {
+  //   document.body.classList.toggle("dark-theme", isDarkTheme);
+  //   localStorage.setItem("darkTheme", isDarkTheme);
+  // }, [isDarkTheme]);
+
+  // const toggleDarkTheme = () => {
+  //   console.log("Executed");
+  //   const newDarkTheme = !isDarkTheme;
+  //   setIsDarkTheme(newDarkTheme);
+  // };
+
+  const [darkTheme, setDarkTheme] = useState(
+    () => localStorage.getItem("darkTheme") === "true"
+  );
+
+  useEffect(() => {
+    localStorage.setItem("darkTheme", darkTheme);
+    document.body.classList.toggle("dark-theme", darkTheme);
+    // You can also update the CSS classes or apply any other necessary changes here
+  }, [darkTheme]);
+
+  const toggleTheme = () => {
+    setDarkTheme((prevTheme) => !prevTheme);
+  };
+
+  useEffect(() => {
+    const storedTheme = localStorage.getItem("darkTheme");
+    if (storedTheme !== null) {
+      setDarkTheme(storedTheme === "true");
+    }
+  }, []);
 
   return (
     <Wrapper>
@@ -57,9 +97,9 @@ const Dashboard = ({ isDarkThemeEnabled }) => {
 
         <div className={`add-info ${state.showNav ? "nav-open" : ""}`}>
           <h2>Ar</h2>
-          <span onClick={() => dispatch({ type: "toggle dark" })}>
-            {state.isDark && <img src={sun} alt="dark" />}
-            {!state.isDark && <img src={dark} alt="dark" />}
+          <span onClick={toggleTheme}>
+            {darkTheme && <img src={sun} alt="dark" />}
+            {!darkTheme && <img src={dark} alt="dark" />}
           </span>
           <span onClick={() => dispatch({ type: "toggle nav" })}>
             <img src={user} alt="user" />

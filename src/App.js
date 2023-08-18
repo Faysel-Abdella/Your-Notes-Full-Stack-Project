@@ -13,7 +13,7 @@ import EditProfile from "./pages/EditProfile";
 const checkDefaultTheme = () => {
   const isDarkTheme = localStorage.getItem("darkTheme") === "true";
   document.body.classList.toggle("dark-theme", isDarkTheme);
-  console.log("Function executed");
+  console.log(isDarkTheme);
   return isDarkTheme;
 };
 
