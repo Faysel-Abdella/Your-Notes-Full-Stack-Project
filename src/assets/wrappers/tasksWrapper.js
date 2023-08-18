@@ -70,6 +70,26 @@ const Wrapper = styled.section`
   .cancel {
     margin-left: auto;
   }
+
+  .additional-info {
+    padding: 20px 24px 15px 24px;
+    color: var(--small-text-color);
+    font-size: var(--small-text);
+    display: flex;
+    justify-content: space-between;
+    button {
+      color: var(--small-text-color);
+      font-size: var(--small-text);
+      font-family: inherit;
+    }
+  }
+  .action-btns {
+    display: flex;
+    column-gap: 18px;
+    button {
+      font-weight: 700;
+    }
+  }
 `;
 
 export default Wrapper;

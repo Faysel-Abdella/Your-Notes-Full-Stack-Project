@@ -31,6 +31,18 @@ const Tasks = () => {
             </button>
           </div>
         ))}
+
+        <div className="additional-info">
+          <span>5 items left</span>
+          <span className="action-btns">
+            <button>All</button>
+            <button>Active</button>
+            <button>Completed</button>
+          </span>
+          <span>
+            <button>Clear Completed</button>
+          </span>
+        </div>
       </div>
     </Wrapper>
   );
