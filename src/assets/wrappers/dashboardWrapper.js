@@ -75,6 +75,36 @@ const Wrapper = styled.section`
     width: 100%;
     height: 100%;
   }
+
+  @media (max-width: 490px) {
+    .top-dashboard {
+      padding: 1.6rem 2rem;
+    }
+    .logo-and-text {
+      gap: 1rem;
+      h2 {
+        font-size: var(--large-text);
+      }
+    }
+    .add-info {
+      gap: 2.5rem;
+      font-size: 18px;
+    }
+  }
+  @media (max-width: 420px) {
+    .top-dashboard {
+      padding: 1.6rem 1.6rem;
+    }
+    .logo-and-text {
+      gap: 1rem;
+      h2 {
+        font-size: 20px;
+      }
+    .add-info {
+      gap: 2rem;
+      font-size: 18px;
+    }
+  }
 `;
 
 export default Wrapper;

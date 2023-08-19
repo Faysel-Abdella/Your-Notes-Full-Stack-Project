@@ -62,7 +62,7 @@ const Dashboard = () => {
     <Wrapper>
       <div className="top-dashboard">
         <div className="logo-and-text">
-          <img src={logo} alt="logo" />
+          <img src={logo} alt="logo" className="dashboard-logo" />
           <h2>Your Notes</h2>
         </div>
 

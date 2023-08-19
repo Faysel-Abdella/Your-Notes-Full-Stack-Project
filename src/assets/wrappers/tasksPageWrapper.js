@@ -4,6 +4,8 @@ const Wrapper = styled.section`
   display: flex;
   justify-content: center;
   margin-top: -13rem;
+  position: relative;
+  z-index: 1;
   .tasks-container {
     /* max-width: 400px; */
   }
