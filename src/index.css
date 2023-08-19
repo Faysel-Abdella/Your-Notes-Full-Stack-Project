@@ -158,6 +158,18 @@ label {
   box-shadow: var(--button-shadow);
   transition: all 0.3s ease;
 }
+
+@media (max-width: 960px) {
+  .cta-button {
+    margin-top: 4.2rem;
+    margin-bottom: 2.4rem;
+  }
+
+  .normal-text {
+    margin-bottom: 16px;
+  }
+}
+
 .cta-button:hover {
   background-color: #ac6391;
 }
