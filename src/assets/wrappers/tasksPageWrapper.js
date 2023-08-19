@@ -18,7 +18,7 @@ const Wrapper = styled.section`
     height: 64px;
     max-width: 100%;
     border-radius: 5px;
-    background: var(--secondary-background);
+    background: var(--task-background);
     box-shadow: var(--task-shadow);
     font-family: inherit;
     font-size: var(--large-medium-text);
@@ -39,20 +39,26 @@ const Wrapper = styled.section`
   }
 
   .below-action-btns {
-    display: flex;
-    justify-content: center;
-    column-gap: 18px;
-    border-radius: 5px;
-    background: var(--secondary-background);
-    padding: 20px 24px 15px 24px;
-    margin-top: 1.6rem;
-    margin-bottom: 10px;
-    box-shadow: var(--task-shadow);
-    button {
-      color: var(--small-text-color);
-      font-size: var(--small-text);
-      font-family: inherit;
-      font-weight: 700;
+    display: none;
+  }
+
+  @media (max-width: 580px) {
+    .below-action-btns {
+      display: flex;
+      justify-content: center;
+      column-gap: 18px;
+      border-radius: 5px;
+      background: var(--task-background);
+      padding: 20px 24px 15px 24px;
+      margin-top: 1.6rem;
+      margin-bottom: 30px;
+      box-shadow: var(--task-shadow);
+      button {
+        color: var(--main-color);
+        font-size: var(--small-text);
+        font-family: inherit;
+        font-weight: 700;
+      }
     }
   }
 

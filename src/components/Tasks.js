@@ -9,6 +9,10 @@ const tasks = [
   { title: "Do the first task", state: "not-complete" },
   { title: "Do the first task", state: "not-complete" },
   { title: "Do the first task", state: "not-complete" },
+  { title: "Do the first task", state: "not-complete" },
+  { title: "Do the first task", state: "not-complete" },
+  { title: "Do the first task", state: "not-complete" },
+  { title: "Do the first task", state: "not-complete" },
 ];
 
 const Tasks = () => {

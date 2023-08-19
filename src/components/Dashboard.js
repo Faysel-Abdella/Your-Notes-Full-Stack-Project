@@ -82,6 +82,8 @@ const Dashboard = () => {
         </div>
       </div>
 
+      <div className="background"></div>
+
       <div className="dashboard-image-container">
         <img src={backgroundImage} alt="" className="dashboard-image" />
       </div>

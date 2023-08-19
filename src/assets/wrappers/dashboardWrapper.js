@@ -12,7 +12,10 @@ const Wrapper = styled.section`
     background: var(--secondary-background);
     border: 1px solid rgba(0, 0, 0, 0);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+  
   }
+
+ 
 
   .logo-and-text {
     display: flex;

@@ -5,14 +5,14 @@ const Wrapper = styled.section`
   width: 100%;
   border-radius: 5px;
   position: relative;
-  background: var(--secondary-background);
+  background: var(--task-background);
   /* padding: 1.8rem 2.2rem; */
-
+  margin-bottom: 30px;
   z-index: 999;
   .task-container {
     display: flex;
     align-items: center;
-    border-bottom: 1.5px solid #e3e4f1;
+    border-bottom: 1px solid #e3e4f1;
     padding: 20px 24px 15px 24px;
   }
 
@@ -94,6 +94,12 @@ const Wrapper = styled.section`
     column-gap: 18px;
     button {
       font-weight: 700;
+    }
+  }
+
+  @media (max-width: 590px) {
+    .action-btns {
+      display: none;
     }
   }
 
