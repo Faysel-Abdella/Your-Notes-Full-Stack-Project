@@ -39,7 +39,7 @@ const SignupPage = () => {
           </form>
           <p className="normal-text">
             Already have an account?{" "}
-            <a className="go-link" href="/">
+            <a className="go-link" href="/login">
               Login
             </a>
           </p>
