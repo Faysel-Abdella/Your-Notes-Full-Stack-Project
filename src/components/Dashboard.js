@@ -10,11 +10,10 @@ import dark from "../assets/images/dark.svg";
 import sun from "../assets/images/sun.svg";
 import backgroundImage from "../assets/images/dashboardcover.png";
 
-const Dashboard = ({ isDarkThemeEnabled }) => {
+const Dashboard = () => {
   const initialState = {
     showNav: false,
     isArabic: false,
-    isDark: isDarkThemeEnabled,
   };
 
   const reducer = (state, action) => {
@@ -32,39 +31,12 @@ const Dashboard = ({ isDarkThemeEnabled }) => {
           isArabic: state.isArabic,
           isDark: state.isDark,
         };
-      case "toggle dark":
-        return {
-          showNav: state.showNav,
-          isArabic: state.isArabic,
-          isDark: !state.isDark,
-        };
       default:
         return state;
     }
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
-
-  // const toggleDark = () => {
-  //   console.log(state.isDark);
-  //   dispatch({ type: "toggle dark" });
-  //   document.body.classList.toggle("dark-theme", state.isDark);
-  //   localStorage.setItem("darkTheme", state.isDark);
-  //   console.log(state.isDark);
-  // };
-
-  // const [isDarkTheme, setIsDarkTheme] = useState(isDarkThemeEnabled);
-
-  // useEffect(() => {
-  //   document.body.classList.toggle("dark-theme", isDarkTheme);
-  //   localStorage.setItem("darkTheme", isDarkTheme);
-  // }, [isDarkTheme]);
-
-  // const toggleDarkTheme = () => {
-  //   console.log("Executed");
-  //   const newDarkTheme = !isDarkTheme;
-  //   setIsDarkTheme(newDarkTheme);
-  // };
 
   const [darkTheme, setDarkTheme] = useState(
     () => localStorage.getItem("darkTheme") === "true"
@@ -73,7 +45,6 @@ const Dashboard = ({ isDarkThemeEnabled }) => {
   useEffect(() => {
     localStorage.setItem("darkTheme", darkTheme);
     document.body.classList.toggle("dark-theme", darkTheme);
-    // You can also update the CSS classes or apply any other necessary changes here
   }, [darkTheme]);
 
   const toggleTheme = () => {

@@ -10,15 +10,6 @@ import Dashboard from "./pages/dashboardLayout";
 import TasksPage from "./pages/TasksPage";
 import EditProfile from "./pages/EditProfile";
 
-const checkDefaultTheme = () => {
-  const isDarkTheme = localStorage.getItem("darkTheme") === "true";
-  document.body.classList.toggle("dark-theme", isDarkTheme);
-  console.log(isDarkTheme);
-  return isDarkTheme;
-};
-
-const isDarkThemeEnabled = checkDefaultTheme();
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -31,7 +22,7 @@ const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <Dashboard isDarkThemeEnabled={isDarkThemeEnabled} />,
+    element: <Dashboard />,
     children: [
       { index: true, element: <TasksPage /> },
       { path: "edit-profile", element: <EditProfile /> },

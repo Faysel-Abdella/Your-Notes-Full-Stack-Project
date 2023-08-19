@@ -5,6 +5,7 @@ const Wrapper = styled.section`
   justify-content: center;
   margin-top: -13rem;
   .tasks-container {
+    /* max-width: 400px; */
   }
   .add-bar {
     position: relative;
@@ -13,6 +14,7 @@ const Wrapper = styled.section`
   .add-input {
     width: 540px;
     height: 64px;
+    max-width: 100%;
     border-radius: 5px;
     background: var(--secondary-background);
     box-shadow: var(--task-shadow);
@@ -32,6 +34,29 @@ const Wrapper = styled.section`
 
   .tasks {
     box-shadow: var(--task-shadow);
+  }
+
+  @media (max-width: 590px) {
+    margin-top: -16rem;
+    .tasks-container {
+      max-width: 400px;
+    }
+  }
+  @media (max-width: 490px) {
+    /* margin-top: -16rem;
+    .tasks-container {
+      max-width: 400px;
+    } */
+  }
+  @media (max-width: 430px) {
+    .tasks-container {
+      max-width: 330px;
+    }
+  }
+  @media (max-width: 360px) {
+    .tasks-container {
+      max-width: 290px;
+    }
   }
 `;
 

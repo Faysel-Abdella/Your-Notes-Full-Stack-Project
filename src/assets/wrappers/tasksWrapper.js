@@ -9,9 +9,6 @@ const Wrapper = styled.section`
   /* padding: 1.8rem 2.2rem; */
 
   z-index: 999;
-  .tasks-container {
-  }
-
   .task-container {
     display: flex;
     align-items: center;
@@ -97,6 +94,12 @@ const Wrapper = styled.section`
     column-gap: 18px;
     button {
       font-weight: 700;
+    }
+  }
+
+  @media (max-width: 430px) {
+    .task-text {
+      /* font-size: var(--small-text); */
     }
   }
 `;
