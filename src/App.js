@@ -9,11 +9,13 @@ import LoginPage from "./pages/LoginPage";
 import Dashboard from "./pages/dashboardLayout";
 import TasksPage from "./pages/TasksPage";
 import EditProfilePage from "./pages/EditProfilePage";
+import ErrorPage from "./pages/404";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <HomePage />,
+    errorElement: <ErrorPage />,
     children: [
       { index: true, element: <SignupPage /> },
       { path: "complete-signup", element: <CompleteSignupPage /> },
