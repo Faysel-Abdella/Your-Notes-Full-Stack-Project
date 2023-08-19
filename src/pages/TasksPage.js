@@ -22,6 +22,11 @@ const TasksPage = () => {
         <div className="tasks">
           <Tasks />
         </div>
+        <div className="below-action-btns">
+          <button>All</button>
+          <button>Active</button>
+          <button>Completed</button>
+        </div>
       </div>
     </Wrapper>
   );

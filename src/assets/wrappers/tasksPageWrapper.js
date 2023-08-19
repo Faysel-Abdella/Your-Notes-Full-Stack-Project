@@ -38,6 +38,24 @@ const Wrapper = styled.section`
     box-shadow: var(--task-shadow);
   }
 
+  .below-action-btns {
+    display: flex;
+    justify-content: center;
+    column-gap: 18px;
+    border-radius: 5px;
+    background: var(--secondary-background);
+    padding: 20px 24px 15px 24px;
+    margin-top: 1.6rem;
+    margin-bottom: 10px;
+    box-shadow: var(--task-shadow);
+    button {
+      color: var(--small-text-color);
+      font-size: var(--small-text);
+      font-family: inherit;
+      font-weight: 700;
+    }
+  }
+
   @media (max-width: 590px) {
     margin-top: -16rem;
     .tasks-container {
