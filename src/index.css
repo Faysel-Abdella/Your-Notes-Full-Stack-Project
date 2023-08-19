@@ -135,6 +135,9 @@ label {
 }
 *:focus {
   outline: none;
+}
+
+.input-field:focus {
   border: 2px solid var(--main-color);
 }
 
@@ -180,6 +183,12 @@ a {
   text-decoration: none;
   font-weight: 700;
   color: inherit;
+  background: transparent;
+  border: 0;
+}
+a:active {
+  border: none;
+  outline: none;
 }
 
 @media (max-width: 900px) {

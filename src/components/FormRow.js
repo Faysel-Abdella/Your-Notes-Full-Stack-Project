@@ -16,7 +16,7 @@ const FormRow = ({ label, name, type, EyeIcon, togglePassword }) => {
           type={type}
           name={name}
           id={name}
-          className="main-input input"
+          className="main-input input input-field"
           required
         />
         {EyeIcon && (
