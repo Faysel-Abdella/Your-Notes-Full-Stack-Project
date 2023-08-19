@@ -18,6 +18,10 @@ const Wrapper = styled.button`
   border-radius: 6px;
   box-shadow: var(--button-shadow);
   transition: all 0.3s ease;
+
+  @media (max-width: 490px) {
+    width: 90vw;
+  }
 `;
 
 export default Wrapper;

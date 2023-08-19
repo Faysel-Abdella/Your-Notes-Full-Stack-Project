@@ -32,6 +32,9 @@ html {
   --normal-color: #697386;
   --complete-task-color: #d1d2da;
 
+  --input-text-color: #000;
+  --show-password-color: #aa3780;
+
   --filter-btn-color: (--small-text-color);
 
   /* Backgrounds */
@@ -42,6 +45,8 @@ html {
   --button-background: #d375b9;
 
   --task-background: #fff;
+  --back-drop-background: rgba(0, 0, 0, 0.75);
+  --input-background: #fff;
 
   /* Shadow */
   --main-shadow: 6px 6px 15px 0px rgba(79, 79, 79, 0.25);
@@ -77,6 +82,9 @@ body {
   --hover-color: #aa3780;
 
   --filter-btn-color: #e3e4f1;
+  --input-text-color: #fff;
+
+  --show-password-color: #fff;
 
   --background-color: #241229;
   --primary-background: #241229;
@@ -84,6 +92,8 @@ body {
   --profile-background: #241229;
 
   --task-background: #25273d;
+  --back-drop-background: rgba(0, 0, 0, 0.75);
+  --input-background: #404363;
 
   /* Shadow */
   --main-shadow: 6px 6px 15px 0px rgba(79, 79, 79, 0.25);

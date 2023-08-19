@@ -8,7 +8,7 @@ import CompleteSignupPage from "./pages/CompleteSignupPage";
 import LoginPage from "./pages/LoginPage";
 import Dashboard from "./pages/dashboardLayout";
 import TasksPage from "./pages/TasksPage";
-import EditProfile from "./pages/EditProfile";
+import EditProfilePage from "./pages/EditProfilePage";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
     element: <Dashboard />,
     children: [
       { index: true, element: <TasksPage /> },
-      { path: "edit-profile", element: <EditProfile /> },
+      { path: "edit-profile", element: <EditProfilePage /> },
     ],
   },
 ]);

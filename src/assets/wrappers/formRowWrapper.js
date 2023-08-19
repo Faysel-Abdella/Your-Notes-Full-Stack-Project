@@ -5,6 +5,8 @@ const Wrapper = styled.section`
     position: relative;
   }
   .input {
+    background: var(--input-background);
+    color: var(--input-text-color);
   }
 
   .eye-icon {
@@ -13,7 +15,7 @@ const Wrapper = styled.section`
     margin-left: -28px;
     margin-top: 12px;
     font-size: 20px;
-    color: #aa3780;
+    color: var(--show-password-color);
   }
 `;
 

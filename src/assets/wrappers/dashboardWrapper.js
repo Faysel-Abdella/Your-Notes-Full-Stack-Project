@@ -79,7 +79,19 @@ const Wrapper = styled.section`
     height: 100%;
   }
 
+
   @media (max-width: 490px) {
+    .profile-navbar {
+    position: fixed;
+    top: 60px;
+    /* right: 20px; */
+    left: 0;
+    height: auto;
+    bottom: 0;
+    width: 100%;
+ 
+
+  }
     .top-dashboard {
       padding: 1.6rem 2rem;
     }
