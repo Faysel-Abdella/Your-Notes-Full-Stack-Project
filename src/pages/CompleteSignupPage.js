@@ -1,4 +1,4 @@
-import { Form, redirect } from "react-router-dom";
+import { Form, redirect, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import Wrapper from "../assets/wrappers/commonWrapper";
@@ -7,20 +7,32 @@ import CtaButton from "../components/CtaButton";
 
 import { PiArrowRightBold, PiArrowLeftBold } from "react-icons/pi";
 
+import customFetch from "../utils/customeFecth";
+import { toast } from "react-toastify";
+
 export const action = async ({ request }) => {
   //Change the request to the formData to simplify
   const formData = await request.formData();
   //Change the formData w/c is array to normal JS obj to send to the backend
   const data = Object.fromEntries(formData);
 
-  console.log(data);
-  return null;
+  try {
+    await customFetch.post("/complete-signup", data);
+    toast.success("Signup completed", { autoClose: 1000 });
+    return redirect("/login");
+  } catch (error) {
+    //use conditional nesting
+    toast.error(error?.response?.data?.message, { autoClose: 4000 });
+    return error;
+  }
 };
 
 const CompletePage = () => {
   const signupEmail = useSelector((state) => state.email);
   const signupPassword = useSelector((state) => state.password);
   const signupConfirmPassword = useSelector((state) => state.confirmPassword);
+
+  const navigate = useNavigate();
 
   console.log(
     "Data from store",
@@ -52,7 +64,12 @@ const CompletePage = () => {
               Icon={PiArrowRightBold}
               type="submit"
             />
-            <CtaButton text="Back" Icon={PiArrowLeftBold} type="button" />
+            <CtaButton
+              text="Back"
+              Icon={PiArrowLeftBold}
+              type="button"
+              onClick={() => navigate("/")}
+            />
           </Form>
           <p className="normal-text">
             Already have an account?{" "}

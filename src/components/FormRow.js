@@ -4,7 +4,15 @@ import { BsEye } from "react-icons/bs";
 import useHomeContext from "../App";
 
 import Wrapper from "../assets/wrappers/formRowWrapper";
-const FormRow = ({ label, name, type, EyeIcon, togglePassword, onChange }) => {
+const FormRow = ({
+  label,
+  name,
+  type,
+  EyeIcon,
+  togglePassword,
+  onChange,
+  value,
+}) => {
   const toggleVisiblePass = () => {
     togglePassword();
   };
@@ -18,6 +26,7 @@ const FormRow = ({ label, name, type, EyeIcon, togglePassword, onChange }) => {
           id={name}
           className="main-input input input-field"
           onChange={onChange}
+          value={value}
           required
         />
         {EyeIcon && (
