@@ -1,27 +1,15 @@
-import Form from "react-dom";
-
 import Wrapper from "../assets/wrappers/homePageWrapper";
-import FormRow from "../components/FormRow";
-import CtaButton from "../components/CtaButton";
 import MainSvg from "../utils/svgs/MainSvg";
-
-import { PiArrowRightBold } from "react-icons/pi";
-import { BsEyeSlash } from "react-icons/bs";
-import { BsEye } from "react-icons/bs";
 
 import bigcover from "../assets/images/bigcover.png";
 import insidecover from "../assets/images/insidecover.png";
 
-import useHomeContext from "../App";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 
 const HomePage = () => {
-  const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
-  const togglePasswordVisible = () => setPasswordVisible(!passwordVisible);
-  const toggleConfirmPasswordVisible = () =>
-    setConfirmPasswordVisible(!confirmPasswordVisible);
+  setConfirmPasswordVisible(!confirmPasswordVisible);
 
   return (
     <Wrapper>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Form, redirect, useNavigate, useNavigation } from "react-router-dom";
+import { Form, redirect, useNavigation } from "react-router-dom";
 
 import Wrapper from "../assets/wrappers/commonWrapper";
 import FormRow from "../components/FormRow";
@@ -51,7 +51,7 @@ const LoginPage = () => {
               EyeIcon={passwordVisible ? BsEye : BsEyeSlash}
               togglePassword={togglePasswordVisible}
             />
-            <h1></h1>
+            <h1>" "</h1>
             <CtaButton
               text={` ${isSigning ? "Logging in..." : "Login"} `}
               type="submit"
