@@ -6,7 +6,7 @@ import HomePage from "./pages/HomePage";
 import SignupPage from "./pages/SignupPage";
 import CompleteSignupPage from "./pages/CompleteSignupPage";
 import LoginPage from "./pages/LoginPage";
-import Dashboard from "./pages/DashboardLayout";
+import Dashboard from "./pages/dashboardLayout";
 import TasksPage from "./pages/TasksPage";
 import EditProfilePage from "./pages/EditProfilePage";
 import ErrorPage from "./pages/404";
