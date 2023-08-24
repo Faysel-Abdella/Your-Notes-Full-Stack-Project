@@ -11,6 +11,8 @@ import TasksPage from "./pages/TasksPage";
 import EditProfilePage from "./pages/EditProfilePage";
 import ErrorPage from "./pages/404";
 
+import { action as completeSignupAction } from "./pages/CompleteSignupPage";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -18,7 +20,11 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <SignupPage /> },
-      { path: "complete-signup", element: <CompleteSignupPage /> },
+      {
+        path: "complete-signup",
+        element: <CompleteSignupPage />,
+        action: completeSignupAction,
+      },
       { path: "login", element: <LoginPage /> },
     ],
   },
