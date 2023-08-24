@@ -14,7 +14,7 @@ import ErrorPage from "./pages/404";
 import { action as completeSignupAction } from "./pages/CompleteSignupPage";
 import { action as loginAction } from "./pages/LoginPage";
 
-import { loader as dashboardPageLoader } from "./pages/EditProfilePage";
+// import { loader as dashboardPageLoader } from "./pages/EditProfilePage";
 
 const router = createBrowserRouter([
   {
@@ -34,7 +34,7 @@ const router = createBrowserRouter([
   {
     path: "dashboard",
     element: <Dashboard />,
-    loader: dashboardPageLoader,
+    // loader: dashboardPageLoader,
     children: [
       { index: true, element: <TasksPage /> },
       {

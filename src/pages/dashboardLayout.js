@@ -19,13 +19,13 @@ export const loader = async () => {
 };
 
 const DashboardLayout = () => {
-  const data = useLoaderData();
-  console.log(data);
+  // const data = useLoaderData();
+  // console.log(data);
   return (
     <Wrapper>
       <Dashboard />
       <div>
-        <Outlet context={{ data }} />
+        <Outlet />
       </div>
     </Wrapper>
   );
