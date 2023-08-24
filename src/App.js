@@ -12,6 +12,7 @@ import EditProfilePage from "./pages/EditProfilePage";
 import ErrorPage from "./pages/404";
 
 import { action as completeSignupAction } from "./pages/CompleteSignupPage";
+import { action as loginAction } from "./pages/LoginPage";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
         element: <CompleteSignupPage />,
         action: completeSignupAction,
       },
-      { path: "login", element: <LoginPage /> },
+      { path: "login", element: <LoginPage />, action: loginAction },
     ],
   },
   {
