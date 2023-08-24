@@ -35,6 +35,10 @@ const Wrapper = styled.section`
     .header-text {
       font-size: 40px;
     }
+
+    .login-header {
+      margin: 3rem 0;
+    }
   }
   @media (max-width: 525px) {
     .signup-container {
