@@ -1,10 +1,5 @@
 import { useState } from "react";
-import {
-  Form,
-  useNavigate,
-  useNavigation,
-  useNavigationType,
-} from "react-router-dom";
+import { Form, useNavigate, useNavigation, redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import Wrapper from "../assets/wrappers/commonWrapper";
@@ -16,6 +11,9 @@ import { signupActions } from "../store/signupInputData";
 import { PiArrowRightBold } from "react-icons/pi";
 import { BsEyeSlash } from "react-icons/bs";
 import { BsEye } from "react-icons/bs";
+
+import customFetch from "../utils/customeFecth";
+import { toast } from "react-toastify";
 
 const SignupPage = () => {
   const navigate = useNavigate();
@@ -32,6 +30,8 @@ const SignupPage = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const [isSigning, setIsSigning] = useState(false);
+
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
@@ -44,8 +44,9 @@ const SignupPage = () => {
     setConfirmPassword(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsSigning(true);
     //Change the values in redux store
     dispatch(
       signupActions.addSignupData({
@@ -54,8 +55,25 @@ const SignupPage = () => {
         confirmPassword: confirmPassword,
       })
     );
-    console.log("After submitting", email, password, confirmPassword);
-    navigate("/complete-signup");
+
+    const request = {
+      email: email,
+      password: password,
+      confirmPassword: confirmPassword,
+    };
+
+    try {
+      await customFetch.post("/first-signup", request);
+      setIsSigning(false);
+      return navigate("/complete-signup");
+    } catch (error) {
+      //use conditional nesting
+      toast.error(error?.response?.data?.message, { autoClose: 4000 });
+      setTimeout(() => {
+        setIsSigning(false);
+      }, 4000);
+      return error;
+    }
   };
 
   return (
@@ -63,7 +81,7 @@ const SignupPage = () => {
       <div className="signup-container">
         <div className="inside-singup">
           <h1>Signup</h1>
-          <Form onSubmit={handleSubmit}>
+          <Form method="POST" onSubmit={handleSubmit}>
             <FormRow
               name="email"
               type="text"
@@ -86,7 +104,12 @@ const SignupPage = () => {
               togglePassword={toggleConfirmPasswordVisible}
               onChange={handleConfirmPasswordChange}
             />
-            <CtaButton text="Complete signup" Icon={PiArrowRightBold} />
+            <CtaButton
+              text={` ${isSigning ? "Signing..." : "Complete signup"} `}
+              type="submit"
+              disabled={isSigning}
+              Icon={PiArrowRightBold}
+            />
           </Form>
           <p className="normal-text">
             Already have an account?{" "}
