@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useLoaderData } from "react-router-dom";
 
 import { BsEyeSlash } from "react-icons/bs";
 import { BsEye } from "react-icons/bs";
 
 import FormRow from "../components/FormRow";
 import CtaButton from "../components/CtaButton";
+import customFetch from "../utils/customeFecth";
 
 import { AiOutlinePlusCircle } from "react-icons/ai";
 
@@ -12,7 +14,15 @@ import Tasks from "../components/Tasks";
 
 import Wrapper from "../assets/wrappers/editProfileWrapper";
 
+export const loader = async () => {
+  const data = await customFetch.get("/user/current-user");
+  console.log(data);
+  return data;
+};
+
 const EditProfile = () => {
+  const data = useLoaderData();
+  console.log(data);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const togglePasswordVisible = () => setPasswordVisible(!passwordVisible);
 

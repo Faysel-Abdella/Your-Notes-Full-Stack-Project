@@ -6,13 +6,15 @@ import HomePage from "./pages/HomePage";
 import SignupPage from "./pages/SignupPage";
 import CompleteSignupPage from "./pages/CompleteSignupPage";
 import LoginPage from "./pages/LoginPage";
-import Dashboard from "./pages/dashboardLayout";
+import Dashboard from "./pages/DashboardLayout";
 import TasksPage from "./pages/TasksPage";
 import EditProfilePage from "./pages/EditProfilePage";
 import ErrorPage from "./pages/404";
 
 import { action as completeSignupAction } from "./pages/CompleteSignupPage";
 import { action as loginAction } from "./pages/LoginPage";
+
+import { loader as dashboardPageLoader } from "./pages/EditProfilePage";
 
 const router = createBrowserRouter([
   {
@@ -32,9 +34,13 @@ const router = createBrowserRouter([
   {
     path: "dashboard",
     element: <Dashboard />,
+    loader: dashboardPageLoader,
     children: [
       { index: true, element: <TasksPage /> },
-      { path: "edit-profile", element: <EditProfilePage /> },
+      {
+        path: "edit-profile",
+        element: <EditProfilePage />,
+      },
     ],
   },
 ]);

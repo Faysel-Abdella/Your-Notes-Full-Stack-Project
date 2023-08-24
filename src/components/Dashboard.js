@@ -25,7 +25,6 @@ const Dashboard = () => {
           isDark: state.isDark,
         };
       case "toggle nav":
-        console.log(state.showNav);
         return {
           showNav: !state.showNav,
           isArabic: state.isArabic,
