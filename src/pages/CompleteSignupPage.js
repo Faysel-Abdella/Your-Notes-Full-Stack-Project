@@ -1,4 +1,4 @@
-import { Form, redirect, useNavigate } from "react-router-dom";
+import { Form, redirect, useNavigate, useNavigation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import Wrapper from "../assets/wrappers/commonWrapper";
@@ -33,6 +33,9 @@ const CompletePage = () => {
   const signupConfirmPassword = useSelector((state) => state.confirmPassword);
 
   const navigate = useNavigate();
+  const navigation = useNavigation();
+
+  const isSigning = navigation.state === "submitting";
 
   console.log(
     "Data from store",
@@ -60,9 +63,10 @@ const CompletePage = () => {
             />
 
             <CtaButton
-              text="Complete signup"
+              text={` ${isSigning ? "Signing..." : "Complete signup"} `}
               Icon={PiArrowRightBold}
               type="submit"
+              disabled={isSigning}
             />
             <CtaButton
               text="Back"

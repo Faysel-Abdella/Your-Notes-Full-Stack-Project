@@ -1,6 +1,11 @@
-const CtaButton = ({ text, Icon, type, onClick }) => {
+const CtaButton = ({ text, Icon, type, onClick, disabled }) => {
   return (
-    <button className="cta-button" type={type} onClick={onClick}>
+    <button
+      className="cta-button"
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+    >
       <p>{text}</p>
       {Icon && <Icon />}
     </button>
