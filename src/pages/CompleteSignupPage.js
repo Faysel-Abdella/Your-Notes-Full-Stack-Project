@@ -11,9 +11,9 @@ const CompletePage = () => {
         <div className="inside-singup">
           <h1 className="header-text">Complete Signup</h1>
           <form>
-            <FormRow name="userName" type="text" label="Username" />
+            <FormRow name="username" type="text" label="Username" />
             <FormRow name="phone" label="Phone" />
-            <FormRow name="birthday" label="Birthday Year" />
+            <FormRow name="birthDayYear" label="Birthday Year" />
             <CtaButton text="Complete signup" Icon={PiArrowRightBold} />
             <CtaButton text="Back" Icon={PiArrowLeftBold} />
           </form>

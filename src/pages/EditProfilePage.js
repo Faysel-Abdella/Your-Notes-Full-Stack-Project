@@ -32,9 +32,9 @@ const EditProfile = () => {
             EyeIcon={passwordVisible ? BsEye : BsEyeSlash}
             togglePassword={togglePasswordVisible}
           />
-          <FormRow name="userName" type="text" label="Username" />
+          <FormRow name="username" type="text" label="Username" />
           <FormRow name="phone" type="number" label="Phone" />
-          <FormRow name="birthDay" type="text" label="Birthday" />
+          <FormRow name="birthdayYear" type="text" label="Birthday" />
         </form>
         <CtaButton text="Save Changes" />
       </div>
