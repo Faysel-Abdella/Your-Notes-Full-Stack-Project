@@ -51,7 +51,7 @@ const LoginPage = () => {
               EyeIcon={passwordVisible ? BsEye : BsEyeSlash}
               togglePassword={togglePasswordVisible}
             />
-            <h1>" "</h1>
+            <h1></h1>
             <CtaButton
               text={` ${isSigning ? "Logging in..." : "Login"} `}
               type="submit"

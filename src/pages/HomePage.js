@@ -8,8 +8,8 @@ import { useState } from "react";
 import { Outlet } from "react-router-dom";
 
 const HomePage = () => {
-  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
-  setConfirmPasswordVisible(!confirmPasswordVisible);
+  // const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+  // setConfirmPasswordVisible(!confirmPasswordVisible);
 
   return (
     <Wrapper>
