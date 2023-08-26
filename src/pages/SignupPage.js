@@ -68,7 +68,7 @@ const SignupPage = () => {
       return navigate("/complete-signup");
     } catch (error) {
       //use conditional nesting
-      toast.error(error?.response?.data?.message, { autoClose: 4000 });
+      toast.error(error?.response?.data?.message, { autoClose: 3000 });
       setTimeout(() => {
         setIsSigning(false);
       }, 4000);
@@ -105,7 +105,7 @@ const SignupPage = () => {
               onChange={handleConfirmPasswordChange}
             />
             <CtaButton
-              text={` ${isSigning ? "Signing..." : "Complete signup"} `}
+              text={` ${isSigning ? "Signing,  wait..." : "Complete signup"} `}
               type="submit"
               disabled={isSigning}
               Icon={PiArrowRightBold}
