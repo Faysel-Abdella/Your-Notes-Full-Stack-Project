@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, redirect } from "react-router-dom";
 
 import { BsEyeSlash } from "react-icons/bs";
 import { BsEye } from "react-icons/bs";
@@ -15,9 +15,18 @@ import Tasks from "../components/Tasks";
 import Wrapper from "../assets/wrappers/editProfileWrapper";
 
 export const loader = async () => {
-  const data = await customFetch.get("/user/current-user");
-  console.log(data);
-  return data;
+  try {
+    //Make request to the current user
+    const res = await customFetch.get("/user/current-user");
+    //extract the data response from axios response
+    const { data } = res;
+    //return it to use it in the component
+    return data;
+  } catch (error) {
+    // If there is any error with finding the user when the user go to dashboard just redirect it to '/'
+    console.log(error);
+    return redirect("/");
+  }
 };
 
 const EditProfile = () => {

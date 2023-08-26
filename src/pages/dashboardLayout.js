@@ -14,13 +14,14 @@ export const loader = async () => {
     return data;
   } catch (error) {
     // If there is any error with finding the user when the user go to dashboard just redirect it to '/'
+    console.log(error);
     return redirect("/");
   }
 };
 
 const DashboardLayout = () => {
-  // const data = useLoaderData();
-  // console.log(data);
+  const data = useLoaderData();
+  console.log(data);
   return (
     <Wrapper>
       <Dashboard />
