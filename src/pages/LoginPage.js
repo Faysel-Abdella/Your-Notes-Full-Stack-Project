@@ -24,12 +24,12 @@ export const action = async ({ request }) => {
     const { token } = dataFromServer.data;
     localStorage.setItem("token", token);
 
-    toast.success("Login success", { autoClose: 3000 });
-    return redirect("/dashboard/");
+    toast.success("Login success, login page", { autoClose: 3000 });
+    return redirect("/dashboard");
   } catch (error) {
-    // toast.error(error?.response?.data?.message);
     console.log(error);
     error.message = error?.response?.data?.message;
+    toast.error(error?.response?.data?.message);
     return error;
   }
 };

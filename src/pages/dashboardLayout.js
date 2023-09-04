@@ -1,33 +1,33 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Outlet, useLoaderData, redirect } from "react-router-dom";
 import Wrapper from "../assets/wrappers/dashboardLayoutWrapper";
 import Dashboard from "../components/Dashboard";
 import customFetch from "../utils/customeFecth";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 // export const loader = async () => {
+//   const token = localStorage.getItem("token");
+//   const data = {
+//     token: token,
+//   };
 
+//   console.log("This is my token", data);
 //   try {
-//     //Make request to the current user
-//     const res = await customFetch.get("/user/verify", {
-//       headers: {
-//         Authorization: token,
-//       },
-//     });
+//     await customFetch.post("/user/check-user", data);
 
-//     //extract the data response from axios response
-//     const { data } = res;
-//     //return it to use it in the component
-//     return data;
+//     return redirect("/dashboard");
 //   } catch (error) {
-//     // If there is any error with finding the user when the user go to dashboard just redirect it to '/'
-//     console.log(error);
+//     // error.message = error?.response?.data?.message;
+//     // toast.error(error?.response?.data?.message);
 //     return redirect("/");
 //   }
 // };
 
 const DashboardLayout = () => {
-  const navigate = useNavigate();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem("token");
     const data = {
@@ -37,21 +37,20 @@ const DashboardLayout = () => {
     console.log("This is my token", data);
     const checkTheUser = async () => {
       try {
-        await customFetch.post("/user/check-user", data);
+        await customFetch.post("/users/check-user", data);
 
-        // toast.success("Login success", { autoClose: 3000 });
-        return redirect("/jobs");
+        toast.success("Login success", { autoClose: 3000 });
+        return redirect("/dashboard");
       } catch (error) {
-        // toast.error(error?.response?.data?.message);
+        console.log(error);
+        toast.error(error?.response?.data?.message);
         error.message = error?.response?.data?.message;
-        return redirect("/signup");
+        return navigate("/");
       }
     };
     checkTheUser();
   }, []);
 
-  const data = useLoaderData();
-  console.log(data);
   return (
     <Wrapper>
       <Dashboard />
@@ -61,4 +60,5 @@ const DashboardLayout = () => {
     </Wrapper>
   );
 };
+
 export default DashboardLayout;
