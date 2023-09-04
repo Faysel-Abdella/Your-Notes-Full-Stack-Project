@@ -17,7 +17,10 @@ export const action = async ({ request }) => {
   const data = Object.fromEntries(formData);
 
   try {
-    await customFetch.post("/complete-signup", data);
+    const dataFromServer = await customFetch.post("/complete-signup", data);
+    const { token } = dataFromServer.data;
+    localStorage.setItem("token", token);
+
     toast.success("Signup completed", { autoClose: 1000 });
     return redirect("/login");
   } catch (error) {

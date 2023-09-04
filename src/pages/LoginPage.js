@@ -19,12 +19,17 @@ export const action = async ({ request }) => {
   const data = Object.fromEntries(formData);
 
   try {
-    await customFetch.post("/auth/login", data);
-    // toast.success("", { autoClose: 1000 });
-    return redirect("/dashboard");
+    const dataFromServer = await customFetch.post("/auth/login", data);
+
+    const { token } = dataFromServer.data;
+    localStorage.setItem("token", token);
+
+    toast.success("Login success", { autoClose: 3000 });
+    return redirect("/dashboard/");
   } catch (error) {
-    //use conditional nesting
-    toast.error(error?.response?.data?.message, { autoClose: 2000 });
+    // toast.error(error?.response?.data?.message);
+    console.log(error);
+    error.message = error?.response?.data?.message;
     return error;
   }
 };
