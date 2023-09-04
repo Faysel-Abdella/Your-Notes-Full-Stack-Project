@@ -25,8 +25,6 @@ import { toast } from "react-toastify";
 // };
 
 const DashboardLayout = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
   const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -49,7 +47,7 @@ const DashboardLayout = () => {
       }
     };
     checkTheUser();
-  }, []);
+  }, [navigate]);
 
   return (
     <Wrapper>
