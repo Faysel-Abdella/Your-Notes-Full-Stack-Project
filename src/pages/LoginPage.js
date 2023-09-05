@@ -25,6 +25,7 @@ export const action = async ({ request }) => {
     localStorage.setItem("token", token);
 
     // toast.success("Login success, login page", { autoClose: 3000 });
+    toast.success("Login success", { autoClose: 2000 });
     return redirect("/dashboard");
   } catch (error) {
     console.log(error);

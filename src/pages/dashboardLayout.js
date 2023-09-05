@@ -37,7 +37,6 @@ const DashboardLayout = () => {
       try {
         await customFetch.post("/user/check-user", data);
 
-        toast.success("Login success", { autoClose: 2000 });
         return redirect("/dashboard");
       } catch (error) {
         console.log(error);
