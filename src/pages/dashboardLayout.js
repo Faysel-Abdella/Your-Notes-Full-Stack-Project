@@ -35,13 +35,12 @@ const DashboardLayout = () => {
     console.log("This is my token", data);
     const checkTheUser = async () => {
       try {
-        await customFetch.post("/users/check-user", data);
+        await customFetch.post("/user/check-user", data);
 
-        toast.success("Login success", { autoClose: 3000 });
+        toast.success("Login success", { autoClose: 2000 });
         return redirect("/dashboard");
       } catch (error) {
         console.log(error);
-        toast.error(error?.response?.data?.message);
         error.message = error?.response?.data?.message;
         return navigate("/");
       }
