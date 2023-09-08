@@ -18,8 +18,7 @@ export const action = async ({ request }) => {
   const data = Object.fromEntries(formData);
 
   try {
-    await customFetch.post("/task", data);
-
+    await customFetch.post("/task", { ...data, token });
     // toast.success("Login success, login page", { autoClose: 3000 });
     // return res.status(201).json({message: "task added"})
     return toast.success("Task added", { autoClose: 2000 });
