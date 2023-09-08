@@ -22,24 +22,24 @@ import Wrapper from "../assets/wrappers/tasksWrapper";
 
 const token = localStorage.getItem("token");
 
-const Tasks = () => {
-  console.log("Request for task....");
-  const [tasks, setTasks] = useState([]);
+const Tasks = ({ tasks }) => {
+  // console.log("Request for task....");
+  // const [tasks, setTasks] = useState([]);
 
-  useEffect(() => {
-    // Fetch tasks from the server
-    customFetch
-      .post("/tasks", { token })
-      .then((response) => {
-        const { tasks } = response.data;
-        //  setTasks(tasks);
-        console.log(tasks);
-        setTasks(tasks);
-      })
-      .catch((error) => {
-        console.error("Failed to fetch tasks", error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   // Fetch tasks from the server
+  //   customFetch
+  //     .post("/tasks", { token })
+  //     .then((response) => {
+  //       const { tasks } = response.data;
+  //       //  setTasks(tasks);
+  //       console.log(tasks);
+  //       setTasks(tasks);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Failed to fetch tasks", error);
+  //     });
+  // }, []);
 
   return (
     <Wrapper>

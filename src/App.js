@@ -13,7 +13,6 @@ import ErrorPage from "./pages/404";
 
 import { action as completeSignupAction } from "./pages/CompleteSignupPage";
 import { action as loginAction } from "./pages/LoginPage";
-import { action as addTaskAction } from "./pages/TasksPage";
 
 import { loader as dashboardPageLoader } from "./pages/dashboardLayout";
 
@@ -37,7 +36,7 @@ const router = createBrowserRouter([
     element: <Dashboard />,
     // loader: dashboardPageLoader,
     children: [
-      { index: true, element: <TasksPage />, action: addTaskAction },
+      { index: true, element: <TasksPage /> },
       {
         path: "edit-profile",
         element: <EditProfilePage />,
