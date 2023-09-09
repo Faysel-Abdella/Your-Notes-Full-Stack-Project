@@ -38,8 +38,6 @@ const TasksPage = () => {
     event.preventDefault();
     const newTaskTitle = event.target.title.value;
 
-    console.log(newTaskTitle);
-
     const newTask = { title: newTaskTitle };
 
     // Update the tasks state immediately

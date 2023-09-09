@@ -3,6 +3,8 @@ import cancel from "../assets/images/cancle.svg";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+import { toast } from "react-toastify";
+
 import { BsCheckLg } from "react-icons/bs";
 
 import customFetch from "../utils/customeFecth";
@@ -41,6 +43,15 @@ const Tasks = ({ tasks }) => {
   //     });
   // }, []);
 
+  const deleteTaskHandler = async (taskId) => {
+    try {
+      await customFetch.delete(`/task/${taskId}`);
+      return toast.success("Task Deleted", { autoClose: 2000 });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Wrapper>
       <div className="tasks-container">
@@ -58,7 +69,10 @@ const Tasks = ({ tasks }) => {
 
               <p className="task-text">{task.title}</p>
 
-              <button className="cancel">
+              <button
+                className="cancel"
+                onClick={() => deleteTaskHandler(task._id)}
+              >
                 <img src={cancel} alt="" className="cancel-img" />
               </button>
             </div>
