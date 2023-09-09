@@ -12,24 +12,6 @@ import customFetch from "../utils/customeFecth";
 
 const token = localStorage.getItem("token");
 
-// export const action = async ({ request }) => {
-//   //Change the request to the formData to simplify
-//   const formData = await request.formData();
-//   //Change the formData w/c is array to normal JS obj to send to the backend
-//   const data = Object.fromEntries(formData);
-
-//   try {
-//     await customFetch.post("/task", { ...data, token });
-//     // toast.success("Login success, login page", { autoClose: 3000 });
-//     // return res.status(201).json({message: "task added"})
-//     return toast.success("Task added", { autoClose: 2000 });
-//   } catch (error) {
-//     console.log(error);
-//     error.message = error?.response?.data?.message;
-//     return error;
-//   }
-// };
-
 const TasksPage = () => {
   console.log("Request for task....");
   const [tasks, setTasks] = useState([]);
@@ -40,22 +22,29 @@ const TasksPage = () => {
 
     const newTask = { title: newTaskTitle };
 
-    // Update the tasks state immediately
-    setTasks((prevTasks) => [...prevTasks, newTask]);
-
-    // Clear the input field
-    event.target.title.value = "";
-
-    // Send the new task to the server (you'll need to implement this)
+    // Send the new task to the server
     customFetch
       .post("/task", { token, title: newTaskTitle })
       .then((response) => {
-        // Handle the server response if needed
         toast.success("Task added", { autoClose: 2000 });
+
+        // Fetch the tasks again to get the updated list
+        customFetch
+          .post("/tasks", { token })
+          .then((response) => {
+            const { tasks } = response.data;
+            setTasks(tasks);
+          })
+          .catch((error) => {
+            console.error("Failed to fetch tasks", error);
+          });
       })
       .catch((error) => {
         console.error("Failed to add task", error);
       });
+
+    // Clear the input field
+    event.target.title.value = "";
   };
 
   useEffect(() => {
@@ -65,13 +54,14 @@ const TasksPage = () => {
       .then((response) => {
         const { tasks } = response.data;
         //  setTasks(tasks);
-        console.log(tasks);
+        console.log(" This is the task when passing", tasks);
         setTasks(tasks);
       })
       .catch((error) => {
         console.error("Failed to fetch tasks", error);
       });
   }, []);
+
   return (
     <Wrapper>
       <div className="tasks-container">

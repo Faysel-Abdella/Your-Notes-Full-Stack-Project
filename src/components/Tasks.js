@@ -1,6 +1,5 @@
 import cancel from "../assets/images/cancle.svg";
 
-import axios from "axios";
 import { useEffect, useState } from "react";
 
 import { toast } from "react-toastify";
@@ -25,27 +24,21 @@ import Wrapper from "../assets/wrappers/tasksWrapper";
 const token = localStorage.getItem("token");
 
 const Tasks = ({ tasks }) => {
-  // console.log("Request for task....");
-  // const [tasks, setTasks] = useState([]);
+  console.log(" This is the task when accepting", tasks);
+  const [tasksList, setTasksList] = useState([]);
 
-  // useEffect(() => {
-  //   // Fetch tasks from the server
-  //   customFetch
-  //     .post("/tasks", { token })
-  //     .then((response) => {
-  //       const { tasks } = response.data;
-  //       //  setTasks(tasks);
-  //       console.log(tasks);
-  //       setTasks(tasks);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Failed to fetch tasks", error);
-  //     });
-  // }, []);
+  useEffect(() => {
+    setTasksList([...tasks]);
+  }, [tasks]);
 
   const deleteTaskHandler = async (taskId) => {
+    console.log("The task id", taskId);
     try {
       await customFetch.delete(`/task/${taskId}`);
+      // Update the tasks state immediately to disappear the task immediately after clicking the delete Btn
+      setTasksList((prevTasks) =>
+        prevTasks.filter((task) => task._id !== taskId)
+      );
       return toast.success("Task Deleted", { autoClose: 2000 });
     } catch (error) {
       console.log(error);
@@ -55,28 +48,31 @@ const Tasks = ({ tasks }) => {
   return (
     <Wrapper>
       <div className="tasks-container">
-        {tasks.length === 0 ? (
+        {tasksList.length === 0 ? (
           <p className="no-task">No task is there.</p>
         ) : (
-          tasks.map((task, index) => (
-            <div
-              className={`task-container ${true ? "com" : ""}`}
-              key={Math.random()}
-            >
-              <span className="check-container">
-                <BsCheckLg className="check-icon" />
-              </span>
-
-              <p className="task-text">{task.title}</p>
-
-              <button
-                className="cancel"
-                onClick={() => deleteTaskHandler(task._id)}
+          tasksList.map((task, index) => {
+            console.log("This is the task in loop", task);
+            return (
+              <div
+                className={`task-container ${true ? "com" : ""}`}
+                key={Math.random()}
               >
-                <img src={cancel} alt="" className="cancel-img" />
-              </button>
-            </div>
-          ))
+                <span className="check-container">
+                  <BsCheckLg className="check-icon" />
+                </span>
+
+                <p className="task-text">{task.title}</p>
+
+                <button
+                  className="cancel"
+                  onClick={() => deleteTaskHandler(task._id)}
+                >
+                  <img src={cancel} alt="" className="cancel-img" />
+                </button>
+              </div>
+            );
+          })
         )}
 
         <div className="additional-info">

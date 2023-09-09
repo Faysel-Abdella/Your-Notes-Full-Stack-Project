@@ -16,6 +16,13 @@ const Wrapper = styled.section`
     padding: 20px 24px 15px 24px;
   }
 
+  .no-task {
+    color: gray;
+    font-size: 20px;
+    padding: 20px 20px;
+    border-bottom: 1px #380909 solid;
+  }
+
   .check-container {
     border: 1px solid var(--main-color);
     border-radius: 50%;
