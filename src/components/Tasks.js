@@ -21,18 +21,77 @@ import Wrapper from "../assets/wrappers/tasksWrapper";
 //   { title: "Do the first task", state: "not-complete" },
 // ];
 
-const token = localStorage.getItem("token");
-
 const Tasks = ({ tasks }) => {
-  // console.log(" This is the task when accepting", tasks);
   const [tasksList, setTasksList] = useState([]);
+  const [onlyActiveTasks, setOnlyActiveTasks] = useState([]);
+  const [onlyCompletedTasks, setOnlyCompletedTasks] = useState([]);
+
+  const [whichTasksToShow, setWhichTasksToShow] = useState(tasks);
+
+  const [leftTasks, setLeftTasks] = useState(0);
+
+  useEffect(() => {
+    setWhichTasksToShow(tasks);
+  }, [tasks]);
 
   useEffect(() => {
     setTasksList([...tasks]);
   }, [tasks]);
 
+  useEffect(() => {
+    let taskLeftNum = 0;
+    // Update leftTasks whenever tasksList changes
+    setLeftTasks(() => {
+      tasksList.forEach((task) => {
+        if (!task.completed) {
+          taskLeftNum += 1;
+        }
+      });
+      return taskLeftNum;
+    });
+  }, [tasksList]);
+
+  useEffect(() => {
+    customFetch
+      .get("/tasks/actives")
+      .then((response) => {
+        const { activeTasks } = response.data;
+        //  setTasks(tasks);
+
+        setOnlyActiveTasks([...activeTasks]);
+      })
+      .catch((error) => {});
+  }, [tasks]);
+
+  useEffect(() => {
+    customFetch
+      .get("/tasks/completed")
+      .then((response) => {
+        const { completedTasks } = response.data;
+        setOnlyCompletedTasks([...completedTasks]);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch tasks", error);
+      });
+  }, [tasks]);
+
+  // ######### //
+
+  const showAllTasks = () => {
+    setWhichTasksToShow(tasksList);
+  };
+
+  const showActiveTasks = () => {
+    setWhichTasksToShow(onlyActiveTasks);
+  };
+
+  const showCompletedTasks = () => {
+    setWhichTasksToShow(onlyCompletedTasks);
+  };
+
+  // ######### //
+
   const deleteTaskHandler = async (taskId) => {
-    console.log("The task id", taskId);
     try {
       await customFetch.delete(`/task/${taskId}`);
       // Update the tasks state immediately to disappear the task immediately after clicking the delete Btn
@@ -69,17 +128,18 @@ const Tasks = ({ tasks }) => {
           return task;
         })
       );
+
+      setLeftTasks((prevLeftTasks) => --prevLeftTasks);
     } catch (error) {}
   };
 
   return (
     <Wrapper>
       <div className="tasks-container">
-        {tasksList.length === 0 ? (
+        {whichTasksToShow.length === 0 ? (
           <p className="no-task">No task is there.</p>
         ) : (
-          tasksList.map((task, index) => {
-            console.log("This is the task in loop", task);
+          whichTasksToShow.map((task, index) => {
             return (
               <div
                 className={`task-container ${
@@ -111,11 +171,11 @@ const Tasks = ({ tasks }) => {
         )}
 
         <div className="additional-info">
-          <span>5 items left</span>
+          <span>{leftTasks} items left</span>
           <span className="action-btns">
-            <button>All</button>
-            <button>Active</button>
-            <button>Completed</button>
+            <button onClick={showAllTasks}>All</button>
+            <button onClick={showActiveTasks}>Active</button>
+            <button onClick={showCompletedTasks}>Completed</button>
           </span>
           <span>
             <button>Clear Completed</button>
