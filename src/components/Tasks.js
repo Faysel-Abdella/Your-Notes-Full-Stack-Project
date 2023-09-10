@@ -38,6 +38,8 @@ const Tasks = ({ tasks }) => {
   const [completeButtonClicked, setCompleteButtonClicked] = useState(false);
   const [deleteButtonClicked, setDeleteButtonClicked] = useState(false);
   const [filterButtonClicked, setFilterButtonClicked] = useState(false);
+  const [clearAllCompletedButtonClicked, setClearAllCompletedButtonClicked] =
+    useState(false);
 
   useEffect(() => {
     setWhichTasksToShow(tasks);
@@ -72,7 +74,13 @@ const Tasks = ({ tasks }) => {
         setAllTasksList([...tasks]);
       })
       .catch((error) => {});
-  }, [completeButtonClicked, deleteButtonClicked, filterButtonClicked, tasks]);
+  }, [
+    completeButtonClicked,
+    deleteButtonClicked,
+    filterButtonClicked,
+    clearAllCompletedButtonClicked,
+    tasks,
+  ]);
 
   useEffect(() => {
     customFetch
@@ -84,7 +92,13 @@ const Tasks = ({ tasks }) => {
         setOnlyActiveTasks([...activeTasks]);
       })
       .catch((error) => {});
-  }, [completeButtonClicked, deleteButtonClicked, filterButtonClicked, tasks]);
+  }, [
+    completeButtonClicked,
+    deleteButtonClicked,
+    filterButtonClicked,
+    clearAllCompletedButtonClicked,
+    tasks,
+  ]);
 
   useEffect(() => {
     customFetch
@@ -96,7 +110,13 @@ const Tasks = ({ tasks }) => {
       .catch((error) => {
         console.error("Failed to fetch tasks", error);
       });
-  }, [completeButtonClicked, deleteButtonClicked, filterButtonClicked, tasks]);
+  }, [
+    completeButtonClicked,
+    deleteButtonClicked,
+    filterButtonClicked,
+    clearAllCompletedButtonClicked,
+    tasks,
+  ]);
   // ####### ******* #######  //
 
   // ######### //
@@ -163,6 +183,20 @@ const Tasks = ({ tasks }) => {
     } catch (error) {}
   };
 
+  //  :) :) :)
+  const clearAllCompletedTasks = async () => {
+    try {
+      const response = await customFetch.delete("/tasks/delete-completed");
+      const { tasksAfterRemoving } = response.data;
+      console.log("This are tasksAfterRemoving", tasksAfterRemoving);
+      setClearAllCompletedButtonClicked((prevState) => !prevState);
+      setWhichTasksToShow((prevTasks) => tasksAfterRemoving);
+      return toast.success("All Completed Tasks Deleted", { autoClose: 2000 });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Wrapper>
       <div className="tasks-container">
@@ -209,7 +243,7 @@ const Tasks = ({ tasks }) => {
             <button onClick={showCompletedTasks}>Completed</button>
           </span>
           <span>
-            <button>Clear Completed</button>
+            <button onClick={clearAllCompletedTasks}>Clear Completed</button>
           </span>
         </div>
       </div>
