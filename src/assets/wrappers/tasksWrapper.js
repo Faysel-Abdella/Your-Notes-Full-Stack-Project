@@ -37,14 +37,14 @@ const Wrapper = styled.section`
   }
   .check-container:hover .check-icon {
     cursor: pointer;
-    display: block;
+    /* display: block;
     font-size: 18px;
     background: #ac8484;
     padding: 1px;
     border-radius: 50%;
     width: 100%;
     height: 100%;
-    color: var(--white-color);
+    color: var(--white-color); */
   }
 
   .task-text {

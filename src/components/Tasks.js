@@ -21,8 +21,12 @@ import Wrapper from "../assets/wrappers/tasksWrapper";
 //   { title: "Do the first task", state: "not-complete" },
 // ];
 
+const token = localStorage.getItem("token");
+
 const Tasks = ({ tasks }) => {
   const [tasksList, setTasksList] = useState([]);
+
+  const [allTasksList, setAllTasksList] = useState([]);
   const [onlyActiveTasks, setOnlyActiveTasks] = useState([]);
   const [onlyCompletedTasks, setOnlyCompletedTasks] = useState([]);
 
@@ -30,26 +34,45 @@ const Tasks = ({ tasks }) => {
 
   const [leftTasks, setLeftTasks] = useState(0);
 
+  //To fetch the active and completed task whenever the complete Button, delete Btn and one of filter button is clicked
+  const [completeButtonClicked, setCompleteButtonClicked] = useState(false);
+  const [deleteButtonClicked, setDeleteButtonClicked] = useState(false);
+  const [filterButtonClicked, setFilterButtonClicked] = useState(false);
+
   useEffect(() => {
     setWhichTasksToShow(tasks);
   }, [tasks]);
 
   useEffect(() => {
     setTasksList([...tasks]);
+    setAllTasksList([...tasks]);
   }, [tasks]);
 
   useEffect(() => {
     let taskLeftNum = 0;
     // Update leftTasks whenever tasksList changes
     setLeftTasks(() => {
-      tasksList.forEach((task) => {
+      whichTasksToShow.forEach((task) => {
         if (!task.completed) {
           taskLeftNum += 1;
         }
       });
       return taskLeftNum;
     });
-  }, [tasksList]);
+  }, [whichTasksToShow]);
+
+  // ####### ******* #######  //
+  useEffect(() => {
+    customFetch
+      .post("/tasks", { token })
+      .then((response) => {
+        const { tasks } = response.data;
+        //  setTasks(tasks);
+
+        setAllTasksList([...tasks]);
+      })
+      .catch((error) => {});
+  }, [completeButtonClicked, deleteButtonClicked, filterButtonClicked, tasks]);
 
   useEffect(() => {
     customFetch
@@ -61,7 +84,7 @@ const Tasks = ({ tasks }) => {
         setOnlyActiveTasks([...activeTasks]);
       })
       .catch((error) => {});
-  }, [tasks]);
+  }, [completeButtonClicked, deleteButtonClicked, filterButtonClicked, tasks]);
 
   useEffect(() => {
     customFetch
@@ -73,41 +96,47 @@ const Tasks = ({ tasks }) => {
       .catch((error) => {
         console.error("Failed to fetch tasks", error);
       });
-  }, [tasks]);
+  }, [completeButtonClicked, deleteButtonClicked, filterButtonClicked, tasks]);
+  // ####### ******* #######  //
 
   // ######### //
 
   const showAllTasks = () => {
-    setWhichTasksToShow(tasksList);
+    setWhichTasksToShow(allTasksList);
+    setFilterButtonClicked((prevState) => !prevState);
   };
 
   const showActiveTasks = () => {
     setWhichTasksToShow(onlyActiveTasks);
+    setFilterButtonClicked((prevState) => !prevState);
   };
 
   const showCompletedTasks = () => {
     setWhichTasksToShow(onlyCompletedTasks);
+    setFilterButtonClicked((prevState) => !prevState);
   };
 
   // ######### //
 
   const deleteTaskHandler = async (taskId) => {
+    setDeleteButtonClicked((prevState) => !prevState);
     try {
       await customFetch.delete(`/task/${taskId}`);
       // Update the tasks state immediately to disappear the task immediately after clicking the delete Btn
-      setTasksList((prevTasks) =>
+      setWhichTasksToShow((prevTasks) =>
         prevTasks.filter((task) => task._id !== taskId)
       );
       return toast.success("Task Deleted", { autoClose: 2000 });
     } catch (error) {
       console.log(error);
     }
+    setDeleteButtonClicked((prevState) => !prevState);
   };
 
   const markAsCompleted = async (taskId) => {
     let completedValue = true;
     try {
-      tasksList.forEach((task) => {
+      whichTasksToShow.forEach((task) => {
         if (task._id === taskId) {
           if (task.completed) {
             completedValue = false;
@@ -117,8 +146,8 @@ const Tasks = ({ tasks }) => {
 
       await customFetch.patch(`/task/${taskId}`, { completed: completedValue });
 
-      setTasksList((prevTasksList) =>
-        prevTasksList.map((task) => {
+      setWhichTasksToShow((prevTasksList) =>
+        whichTasksToShow.map((task) => {
           if (task._id === taskId) {
             return {
               ...task,
@@ -130,6 +159,7 @@ const Tasks = ({ tasks }) => {
       );
 
       setLeftTasks((prevLeftTasks) => --prevLeftTasks);
+      setCompleteButtonClicked((prevState) => !prevState);
     } catch (error) {}
   };
 
@@ -137,15 +167,16 @@ const Tasks = ({ tasks }) => {
     <Wrapper>
       <div className="tasks-container">
         {whichTasksToShow.length === 0 ? (
-          <p className="no-task">No task is there.</p>
+          <p className="no-task">No task is here.</p>
         ) : (
           whichTasksToShow.map((task, index) => {
+            console.log("Task in loop", task);
             return (
               <div
                 className={`task-container ${
                   task.completed === true ? "complete" : ""
                 }`}
-                key={Math.random()}
+                key={task._id}
               >
                 <span
                   className={`check-container `}

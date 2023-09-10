@@ -13,7 +13,6 @@ import customFetch from "../utils/customeFecth";
 const token = localStorage.getItem("token");
 
 const TasksPage = () => {
-  console.log("Request for task....");
   const [tasks, setTasks] = useState([]);
 
   const handleAddTask = (event) => {
@@ -54,7 +53,6 @@ const TasksPage = () => {
       .then((response) => {
         const { tasks } = response.data;
         //  setTasks(tasks);
-        console.log(" This is the task when passing", tasks);
         setTasks(tasks);
       })
       .catch((error) => {
