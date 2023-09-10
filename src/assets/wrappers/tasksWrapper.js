@@ -39,7 +39,7 @@ const Wrapper = styled.section`
     cursor: pointer;
     display: block;
     font-size: 18px;
-    background: var(--main-color);
+    background: #ac8484;
     padding: 1px;
     border-radius: 50%;
     width: 100%;

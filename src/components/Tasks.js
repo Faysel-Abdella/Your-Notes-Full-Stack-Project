@@ -24,7 +24,7 @@ import Wrapper from "../assets/wrappers/tasksWrapper";
 const token = localStorage.getItem("token");
 
 const Tasks = ({ tasks }) => {
-  console.log(" This is the task when accepting", tasks);
+  // console.log(" This is the task when accepting", tasks);
   const [tasksList, setTasksList] = useState([]);
 
   useEffect(() => {
@@ -45,6 +45,33 @@ const Tasks = ({ tasks }) => {
     }
   };
 
+  const markAsCompleted = async (taskId) => {
+    let completedValue = true;
+    try {
+      tasksList.forEach((task) => {
+        if (task._id === taskId) {
+          if (task.completed) {
+            completedValue = false;
+          }
+        }
+      });
+
+      await customFetch.patch(`/task/${taskId}`, { completed: completedValue });
+
+      setTasksList((prevTasksList) =>
+        prevTasksList.map((task) => {
+          if (task._id === taskId) {
+            return {
+              ...task,
+              completed: completedValue,
+            };
+          }
+          return task;
+        })
+      );
+    } catch (error) {}
+  };
+
   return (
     <Wrapper>
       <div className="tasks-container">
@@ -55,11 +82,19 @@ const Tasks = ({ tasks }) => {
             console.log("This is the task in loop", task);
             return (
               <div
-                className={`task-container ${true ? "com" : ""}`}
+                className={`task-container ${
+                  task.completed === true ? "complete" : ""
+                }`}
                 key={Math.random()}
               >
-                <span className="check-container">
-                  <BsCheckLg className="check-icon" />
+                <span
+                  className={`check-container `}
+                  onClick={() => markAsCompleted(task._id)}
+                >
+                  <BsCheckLg
+                    className="check-icon"
+                    onClick={() => markAsCompleted(task._id)}
+                  />
                 </span>
 
                 <p className="task-text">{task.title}</p>
