@@ -24,6 +24,7 @@ const Wrapper = styled.section`
   }
 
   .check-container {
+    cursor: pointer;
     border: 1px solid var(--main-color);
     border-radius: 50%;
     width: 24px;
@@ -34,6 +35,7 @@ const Wrapper = styled.section`
   }
   .check-icon {
     display: none;
+    cursor: pointer;
   }
   .check-container:hover .check-icon {
     cursor: pointer;
