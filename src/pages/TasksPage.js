@@ -10,9 +10,8 @@ import Wrapper from "../assets/wrappers/tasksPageWrapper";
 
 import customFetch from "../utils/customeFecth";
 
-const token = localStorage.getItem("token");
-
 const TasksPage = () => {
+  const token = localStorage.getItem("token");
   const [tasks, setTasks] = useState([]);
 
   const handleAddTask = (event) => {
