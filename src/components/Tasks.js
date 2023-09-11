@@ -188,7 +188,6 @@ const Tasks = ({ tasks }) => {
     try {
       const response = await customFetch.delete("/tasks/delete-completed");
       const { tasksAfterRemoving } = response.data;
-      console.log("This are tasksAfterRemoving", tasksAfterRemoving);
       setClearAllCompletedButtonClicked((prevState) => !prevState);
       setWhichTasksToShow((prevTasks) => tasksAfterRemoving);
       return toast.success("All Completed Tasks Deleted", { autoClose: 2000 });
@@ -204,7 +203,6 @@ const Tasks = ({ tasks }) => {
           <p className="no-task">No task is here.</p>
         ) : (
           whichTasksToShow.map((task, index) => {
-            console.log("Task in loop", task);
             return (
               <div
                 className={`task-container ${

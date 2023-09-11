@@ -9,24 +9,6 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { userNameActions } from "../store/index";
 
-// export const loader = async () => {
-//   const token = localStorage.getItem("token");
-//   const data = {
-//     token: token,
-//   };
-
-//   console.log("This is my token", data);
-//   try {
-//     await customFetch.post("/user/check-user", data);
-
-//     return redirect("/dashboard");
-//   } catch (error) {
-//     // error.message = error?.response?.data?.message;
-//     // toast.error(error?.response?.data?.message);
-//     return redirect("/");
-//   }
-// };
-
 const DashboardLayout = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -36,7 +18,6 @@ const DashboardLayout = () => {
       token: token,
     };
 
-    console.log("This is my token", data);
     const checkTheUser = async () => {
       try {
         await customFetch.post("/user/check-user", data);

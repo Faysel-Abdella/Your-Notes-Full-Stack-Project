@@ -48,16 +48,15 @@ const CompletePage = () => {
 
   const updateUserName = (event) => {
     const newUserName = event.target.username.value;
-    console.log("This is the new user name", newUserName);
     dispatch(userNameActions.setUserName({ userName: newUserName }));
   };
 
-  console.log(
-    "Data from store",
-    signupEmail,
-    signupPassword,
-    signupConfirmPassword
-  );
+  // console.log(
+  //   "Data from store",
+  //   signupEmail,
+  //   signupPassword,
+  //   signupConfirmPassword
+  // );
 
   return (
     <Wrapper>

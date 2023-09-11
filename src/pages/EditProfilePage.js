@@ -19,26 +19,10 @@ import Wrapper from "../assets/wrappers/editProfileWrapper";
 
 const token = localStorage.getItem("token");
 
-// export const loader = async () => {
-//   try {
-//     //Make request to the current user
-//     const res = await customFetch.get("/user/current-user");
-//     //extract the data response from axios response
-//     const { data } = res;
-//     //return it to use it in the component
-//     return data;
-//   } catch (error) {
-//     // If there is any error with finding the user when the user go to dashboard just redirect it to '/'
-//     console.log(error);
-//     return redirect("/");
-//   }
-// };
-
 export const action = async ({ request }) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
   data.token = token;
-  console.log("This is the data in user edit", data);
 
   try {
     await customFetch.patch("/user/update-user", data);
@@ -63,7 +47,6 @@ const EditProfile = () => {
 
   const updateUserName = (event) => {
     const newUserName = event.target.username.value;
-    console.log("This is the new user name", newUserName);
     dispatch(userNameActions.setUserName({ userName: newUserName }));
   };
 
