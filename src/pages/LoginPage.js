@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { Form, redirect, useNavigation } from "react-router-dom";
 
@@ -34,6 +34,8 @@ export const action = async ({ request }) => {
     return error;
   }
 };
+
+const token = localStorage.getItem("token");
 
 const LoginPage = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);

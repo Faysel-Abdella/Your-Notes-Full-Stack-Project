@@ -13,8 +13,9 @@ import ErrorPage from "./pages/404";
 
 import { action as completeSignupAction } from "./pages/CompleteSignupPage";
 import { action as loginAction } from "./pages/LoginPage";
+import { action as editUserAction } from "./pages/EditProfilePage";
 
-import { loader as dashboardPageLoader } from "./pages/dashboardLayout";
+// import { loader as dashboardPageLoader } from "./pages/dashboardLayout";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,7 @@ const router = createBrowserRouter([
       {
         path: "edit-profile",
         element: <EditProfilePage />,
+        action: editUserAction,
       },
     ],
   },

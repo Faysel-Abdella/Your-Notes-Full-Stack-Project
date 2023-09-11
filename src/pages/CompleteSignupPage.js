@@ -1,6 +1,9 @@
 import { Form, redirect, useNavigate, useNavigation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+import { useDispatch } from "react-redux";
+import { userNameActions } from "../store/index";
+
 import Wrapper from "../assets/wrappers/commonWrapper";
 import FormRow from "../components/FormRow";
 import CtaButton from "../components/CtaButton";
@@ -31,14 +34,23 @@ export const action = async ({ request }) => {
 };
 
 const CompletePage = () => {
-  const signupEmail = useSelector((state) => state.email);
-  const signupPassword = useSelector((state) => state.password);
-  const signupConfirmPassword = useSelector((state) => state.confirmPassword);
+  const signupEmail = useSelector((state) => state.signup.email);
+  const signupPassword = useSelector((state) => state.signup.password);
+  const signupConfirmPassword = useSelector(
+    (state) => state.signup.confirmPassword
+  );
 
   const navigate = useNavigate();
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const isSigning = navigation.state === "submitting";
+
+  const updateUserName = (event) => {
+    const newUserName = event.target.username.value;
+    console.log("This is the new user name", newUserName);
+    dispatch(userNameActions.setUserName({ userName: newUserName }));
+  };
 
   console.log(
     "Data from store",
@@ -52,7 +64,7 @@ const CompletePage = () => {
       <div className="signup-container">
         <div className="inside-singup">
           <h1 className="header-text">Complete Signup</h1>
-          <Form method="POST">
+          <Form method="POST" onSubmit={updateUserName}>
             <FormRow name="username" type="text" label="Username" />
             <FormRow name="phone" label="Phone" />
             <FormRow name="birthDayYear" label="Birthday Year" />

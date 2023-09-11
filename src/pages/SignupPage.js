@@ -6,7 +6,7 @@ import Wrapper from "../assets/wrappers/commonWrapper";
 import FormRow from "../components/FormRow";
 import CtaButton from "../components/CtaButton";
 
-import { signupActions } from "../store/signupInputData";
+import { signupActions } from "../store/index";
 
 import { PiArrowRightBold } from "react-icons/pi";
 import { BsEyeSlash } from "react-icons/bs";

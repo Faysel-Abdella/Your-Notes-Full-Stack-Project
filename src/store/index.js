@@ -17,12 +17,26 @@ const signupDataSlice = createSlice({
   },
 });
 
+const userNameSlice = createSlice({
+  name: "userName data",
+  initialState: {
+    userName: "",
+  },
+
+  reducers: {
+    setUserName(state, action) {
+      state.userName = action.payload.userName;
+    },
+  },
+});
+
 const store = configureStore({
-  reducer: signupDataSlice.reducer,
+  reducer: { signup: signupDataSlice.reducer, userName: userNameSlice.reducer },
 });
 // configureStore created store and as createStore it needs to know the reducer which will be responsible for changing it, so we pass this reducer with a special property of reducer
 
 export const signupActions = signupDataSlice.actions;
 // signupActions contains all reducers that are in signupDataSlice slice
+export const userNameActions = userNameSlice.actions;
 
 export default store;
