@@ -21,10 +21,9 @@ import Wrapper from "../assets/wrappers/tasksWrapper";
 //   { title: "Do the first task", state: "not-complete" },
 // ];
 
-const token = localStorage.getItem("token");
-
 const Tasks = ({ tasks }) => {
   const [tasksList, setTasksList] = useState([]);
+  const token = localStorage.getItem("token");
 
   const [allTasksList, setAllTasksList] = useState([]);
   const [onlyActiveTasks, setOnlyActiveTasks] = useState([]);
@@ -80,6 +79,7 @@ const Tasks = ({ tasks }) => {
     filterButtonClicked,
     clearAllCompletedButtonClicked,
     tasks,
+    token,
   ]);
 
   useEffect(() => {
@@ -98,9 +98,11 @@ const Tasks = ({ tasks }) => {
     filterButtonClicked,
     clearAllCompletedButtonClicked,
     tasks,
+    token,
   ]);
 
   useEffect(() => {
+    console.log("Token when fetching completed tasks", token);
     customFetch
       .post("/tasks/completed", { token })
       .then((response) => {
@@ -116,6 +118,7 @@ const Tasks = ({ tasks }) => {
     filterButtonClicked,
     clearAllCompletedButtonClicked,
     tasks,
+    token,
   ]);
   // ####### ******* #######  //
 
@@ -186,7 +189,9 @@ const Tasks = ({ tasks }) => {
   //  :) :) :)
   const clearAllCompletedTasks = async () => {
     try {
-      const response = await customFetch.delete("/tasks/delete-completed");
+      const response = await customFetch.post("/tasks/delete-completed", {
+        token,
+      });
       const { tasksAfterRemoving } = response.data;
       setClearAllCompletedButtonClicked((prevState) => !prevState);
       setWhichTasksToShow((prevTasks) => tasksAfterRemoving);
