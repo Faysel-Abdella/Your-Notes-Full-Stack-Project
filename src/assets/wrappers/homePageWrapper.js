@@ -14,8 +14,9 @@ const Wrapper = styled.section`
     top: 0;
     left: 0;
     height: 100vh;
+    width: 100vw;
     overflow-x: hidden;
-    height: auto;
+    // height: auto;
     background: lightgray -420579.188px 9511.216px / 21741.606% 11808.408% no-repeat;
     z-index: -999;
   }

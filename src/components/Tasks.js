@@ -84,7 +84,7 @@ const Tasks = ({ tasks }) => {
 
   useEffect(() => {
     customFetch
-      .get("/tasks/actives")
+      .post("/tasks/actives", { token })
       .then((response) => {
         const { activeTasks } = response.data;
         //  setTasks(tasks);
@@ -102,7 +102,7 @@ const Tasks = ({ tasks }) => {
 
   useEffect(() => {
     customFetch
-      .get("/tasks/completed")
+      .post("/tasks/completed", { token })
       .then((response) => {
         const { completedTasks } = response.data;
         setOnlyCompletedTasks([...completedTasks]);

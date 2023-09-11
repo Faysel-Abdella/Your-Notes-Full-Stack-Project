@@ -57,7 +57,7 @@ const TasksPage = () => {
       .catch((error) => {
         console.error("Failed to fetch tasks", error);
       });
-  }, []);
+  }, [token]);
 
   return (
     <Wrapper>
