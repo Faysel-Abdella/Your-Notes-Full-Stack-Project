@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLoaderData, redirect, Form, useNavigation } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { BsEyeSlash } from "react-icons/bs";
 import { BsEye } from "react-icons/bs";
@@ -37,7 +37,8 @@ export const action = async ({ request }) => {
 };
 
 const EditProfile = () => {
-  const data = useLoaderData();
+  const language = useSelector((state) => state.langPreference.langPreference);
+  const isArabic = language === "ar";
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -54,7 +55,9 @@ const EditProfile = () => {
     <Wrapper>
       <div className="edit-profile-container">
         <div className="edit-profile-header">
-          <h3>Modify User Information</h3>
+          <h3>
+            {isArabic ? "تعديل بيانات الحساب" : "Modify User Information"}
+          </h3>
         </div>
 
         <Form
@@ -62,18 +65,45 @@ const EditProfile = () => {
           method="POST"
           onSubmit={updateUserName}
         >
-          <FormRow name="email" type="text" label="Email" />
+          <FormRow
+            name="email"
+            type="text"
+            label={isArabic ? "الحساب" : "Email"}
+          />
           <FormRow
             name="password"
             type={passwordVisible ? "text" : "password"}
-            label="Password"
+            label={isArabic ? "الرقم السري" : "Password"}
             EyeIcon={passwordVisible ? BsEye : BsEyeSlash}
             togglePassword={togglePasswordVisible}
           />
-          <FormRow name="username" type="text" label="Username" />
-          <FormRow name="phone" type="number" label="Phone" />
-          <FormRow name="birthDayYear" type="text" label="Birthday" />
-          <CtaButton text={`${isSubmitting ? "Saving..." : "Save Changes"}`} />
+          <FormRow
+            name="username"
+            type="text"
+            label={isArabic ? "اسم المستخدم" : "Username"}
+          />
+          <FormRow
+            name="phone"
+            type="number"
+            label={isArabic ? "رقم الهاتف" : "Phone"}
+          />
+          <FormRow
+            name="birthDayYear"
+            type="text"
+            label={isArabic ? "سنة الميلاد" : "Birthday"}
+          />
+          <CtaButton
+            text={
+              isSubmitting
+                ? isArabic
+                  ? "انتظر"
+                  : "Saving..."
+                : isArabic
+                ? "حفظ التعديلات"
+                : "Save Changes"
+            }
+            type="submit"
+          />
         </Form>
       </div>
     </Wrapper>

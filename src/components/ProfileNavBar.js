@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -6,11 +5,9 @@ import Wrapper from "../assets/wrappers/profileNavBarWrapper";
 import ProfileButton from "./ProfileButton";
 import cancel from "../assets/images/cancle.svg";
 
-import customFetch from "../utils/customeFecth";
-
-const token = localStorage.getItem("token");
-
 const ProfileNavBar = () => {
+  const language = useSelector((state) => state.langPreference.langPreference);
+  const isArabic = language === "ar";
   const navigate = useNavigate();
 
   const newUserNameObj = useSelector((state) => state.userName);
@@ -30,9 +27,17 @@ const ProfileNavBar = () => {
           <img src={cancel} alt="cancel-btn" className="cancel-inside" />
         </div> */}
 
-        <p className="user-greet">Hi {newUserName}</p>
-        <ProfileButton text="Modify User info" link="dashboard/edit-profile" />
-        <ProfileButton text="Logout" onClick={logoutHandler} />
+        <p className="user-greet">
+          {isArabic ? `${newUserName} مرحباً ` : `Hi ${newUserName}`}
+        </p>
+        <ProfileButton
+          text={isArabic ? "تعديل بيانات الحساب " : "Modify User info"}
+          link="dashboard/edit-profile"
+        />
+        <ProfileButton
+          text={isArabic ? "تسجيل الخروج" : "Logout"}
+          onClick={logoutHandler}
+        />
       </div>
     </Wrapper>
   );
