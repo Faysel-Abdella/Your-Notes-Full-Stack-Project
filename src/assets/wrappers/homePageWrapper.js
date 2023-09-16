@@ -13,12 +13,17 @@ const Wrapper = styled.section`
     position: absolute;
     top: 0;
     left: 0;
-    height: 100vh;
+    /* height: 100vh; */
+    min-height: 100vh;
     width: 100vw;
     overflow-x: hidden;
     // height: auto;
     background: lightgray -420579.188px 9511.216px / 21741.606% 11808.408% no-repeat;
     z-index: -999;
+  }
+
+  .isArabic .inside-main {
+    flex-direction: row-reverse !important;
   }
 
   .inside-main {

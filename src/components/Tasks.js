@@ -2,6 +2,8 @@ import cancel from "../assets/images/cancle.svg";
 
 import { useEffect, useState } from "react";
 
+import { useSelector } from "react-redux";
+
 import { toast } from "react-toastify";
 
 import { BsCheckLg } from "react-icons/bs";
@@ -32,6 +34,9 @@ const Tasks = ({ tasks }) => {
   const [whichTasksToShow, setWhichTasksToShow] = useState(tasks);
 
   const [leftTasks, setLeftTasks] = useState(0);
+
+  const language = useSelector((state) => state.langPreference.langPreference);
+  const isArabic = language === "ar";
 
   //To fetch the active and completed task whenever the complete Button, delete Btn and one of filter button is clicked
   const [completeButtonClicked, setCompleteButtonClicked] = useState(false);
@@ -239,14 +244,24 @@ const Tasks = ({ tasks }) => {
         )}
 
         <div className="additional-info">
-          <span>{leftTasks} items left</span>
+          <span>
+            {isArabic
+              ? `ملاحظات متبقية ${leftTasks}`
+              : `${leftTasks} items left`}
+          </span>
           <span className="action-btns">
-            <button onClick={showAllTasks}>All</button>
-            <button onClick={showActiveTasks}>Active</button>
-            <button onClick={showCompletedTasks}>Completed</button>
+            <button onClick={showAllTasks}>{isArabic ? "الكل" : "All"}</button>
+            <button onClick={showActiveTasks}>
+              {isArabic ? "متبقي" : "Active"}
+            </button>
+            <button onClick={showCompletedTasks}>
+              {isArabic ? "منتهي" : "Completed"}
+            </button>
           </span>
           <span>
-            <button onClick={clearAllCompletedTasks}>Clear Completed</button>
+            <button onClick={clearAllCompletedTasks}>
+              {isArabic ? "مسح ما تم إنهاؤه" : "Clear Completed"}
+            </button>
           </span>
         </div>
       </div>

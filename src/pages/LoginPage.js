@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 import { Form, redirect, useNavigation } from "react-router-dom";
 
@@ -35,11 +36,18 @@ export const action = async ({ request }) => {
   }
 };
 
-const token = localStorage.getItem("token");
-
 const LoginPage = () => {
+  const token = localStorage.getItem("token");
   const [passwordVisible, setPasswordVisible] = useState(false);
   const togglePasswordVisible = () => setPasswordVisible(!passwordVisible);
+
+  const language = useSelector((state) => state.langPreference.langPreference);
+
+  const isArabic = language === "ar";
+
+  useEffect(() => {
+    document.body.classList.toggle("isArabic", isArabic);
+  }, [isArabic]);
 
   const navigation = useNavigation();
 
@@ -49,26 +57,38 @@ const LoginPage = () => {
     <Wrapper>
       <div className="signup-container">
         <div className="inside-singup">
-          <h1 className="login-header">login</h1>
+          <h1 className="login-header">{isArabic ? "تسجيل دخول" : "login"}</h1>
           <Form method="POST">
-            <FormRow name="email" type="text" label="Email" />
+            <FormRow
+              name="email"
+              type="text"
+              label={isArabic ? "الحساب" : "Email"}
+            />
             <FormRow
               name="password"
               type={passwordVisible ? "text" : "password"}
-              label="Password"
+              label={isArabic ? "الرقم السري" : "Password"}
               EyeIcon={passwordVisible ? BsEye : BsEyeSlash}
               togglePassword={togglePasswordVisible}
             />
             <h1></h1>
             <CtaButton
-              text={` ${isSigning ? "Logging in..." : "Login"} `}
+              text={
+                isSigning
+                  ? isArabic
+                    ? "جاري الإنشاء، انتظر"
+                    : "Logging in..."
+                  : isArabic
+                  ? "تسجيل دخول"
+                  : "Login"
+              }
               type="submit"
             />
           </Form>
           <p className="normal-text login-page-normal-text">
-            Don't have an account?{" "}
+            {isArabic ? "ليس عندك حساب ؟" : "Don't have an account?"}{" "}
             <a className="go-link" href="/">
-              Singup
+              {isArabic ? "انشاء الحساب" : "Singup"}
             </a>
           </p>
         </div>

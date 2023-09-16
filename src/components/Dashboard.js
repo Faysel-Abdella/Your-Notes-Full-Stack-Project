@@ -10,20 +10,39 @@ import dark from "../assets/images/dark.svg";
 import sun from "../assets/images/sun.svg";
 import backgroundImage from "../assets/images/dashboardcover.png";
 
+import { useSelector, useDispatch } from "react-redux";
+import { languageActions } from "../store/index";
+
 const Dashboard = () => {
+  const language = useSelector((state) => state.langPreference.langPreference);
+
+  const reduxDispatch = useDispatch();
+
+  console.log(language);
+
+  const isArabic = language === "ar";
+
+  const toggleLanguage = () => {
+    if (language === "ar") {
+      localStorage.setItem("language", "en");
+      reduxDispatch(
+        languageActions.setLangPreference({ langPreference: "en" })
+      );
+    } else {
+      localStorage.setItem("language", "ar");
+      reduxDispatch(
+        languageActions.setLangPreference({ langPreference: "ar" })
+      );
+    }
+    // localStorage.setItem("language", "check");
+  };
+
   const initialState = {
     showNav: false,
-    isArabic: false,
   };
 
   const reducer = (state, action) => {
     switch (action.type) {
-      case "toggle lang":
-        return {
-          showNav: state.showNav,
-          isArabic: !state.isArabic,
-          isDark: state.isDark,
-        };
       case "toggle nav":
         return {
           showNav: !state.showNav,
@@ -51,6 +70,10 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
+    document.body.classList.toggle("isArabic", isArabic);
+  }, [isArabic]);
+
+  useEffect(() => {
     const storedTheme = localStorage.getItem("darkTheme");
     if (storedTheme !== null) {
       setDarkTheme(storedTheme === "true");
@@ -66,7 +89,7 @@ const Dashboard = () => {
         </div>
 
         <div className={`add-info ${state.showNav ? "nav-open" : ""}`}>
-          <h2>Ar</h2>
+          <h2 onClick={toggleLanguage}>Ar</h2>
           <span onClick={toggleTheme}>
             {darkTheme && <img src={sun} alt="dark" />}
             {!darkTheme && <img src={dark} alt="dark" />}

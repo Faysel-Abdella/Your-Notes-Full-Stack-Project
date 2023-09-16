@@ -4,12 +4,25 @@ import MainSvg from "../utils/svgs/MainSvg";
 import bigcover from "../assets/images/bigcover.png";
 import insidecover from "../assets/images/insidecover.png";
 
-import { useState } from "react";
 import { Outlet } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { languageActions } from "../store/index";
 
 const HomePage = () => {
-  // const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
-  // setConfirmPasswordVisible(!confirmPasswordVisible);
+  const language = useSelector((state) => state.langPreference.langPreference);
+  const dispatch = useDispatch();
+
+  const isArabic = language === "ar";
+
+  const toggleLanguage = () => {
+    if (language === "ar") {
+      localStorage.setItem("language", "en");
+      dispatch(languageActions.setLangPreference({ langPreference: "en" }));
+    } else {
+      localStorage.setItem("language", "ar");
+      dispatch(languageActions.setLangPreference({ langPreference: "ar" }));
+    }
+  };
 
   return (
     <Wrapper>
@@ -32,7 +45,9 @@ const HomePage = () => {
                 </h2>
               </div>
             </div>
-            <span className="lang">Ar</span>
+            <span className="lang" onClick={toggleLanguage}>
+              {isArabic ? "En" : "Ar"}
+            </span>
           </div>
           <Outlet />
         </main>

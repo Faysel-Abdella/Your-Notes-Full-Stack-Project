@@ -30,13 +30,32 @@ const userNameSlice = createSlice({
   },
 });
 
+const languageSlice = createSlice({
+  name: "language preference",
+  initialState: {
+    langPreference: localStorage.getItem("language") || "en", // Default language or retrieve from local storage
+  },
+
+  reducers: {
+    setLangPreference(state, action) {
+      state.langPreference = action.payload.langPreference;
+    },
+  },
+});
+
 const store = configureStore({
-  reducer: { signup: signupDataSlice.reducer, userName: userNameSlice.reducer },
+  reducer: {
+    signup: signupDataSlice.reducer,
+    userName: userNameSlice.reducer,
+    langPreference: languageSlice.reducer,
+  },
 });
 // configureStore created store and as createStore it needs to know the reducer which will be responsible for changing it, so we pass this reducer with a special property of reducer
 
 export const signupActions = signupDataSlice.actions;
 // signupActions contains all reducers that are in signupDataSlice slice
 export const userNameActions = userNameSlice.actions;
+
+export const languageActions = languageSlice.actions;
 
 export default store;

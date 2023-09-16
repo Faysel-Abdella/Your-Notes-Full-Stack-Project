@@ -1,5 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
+import { useContext } from "react";
+
 import "./App.css";
 
 import HomePage from "./pages/HomePage";

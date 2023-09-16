@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { AiOutlinePlusCircle } from "react-icons/ai";
+import { useSelector } from "react-redux";
 
 import { Form, redirect } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -13,6 +14,9 @@ import customFetch from "../utils/customeFecth";
 const TasksPage = () => {
   const token = localStorage.getItem("token");
   const [tasks, setTasks] = useState([]);
+
+  const language = useSelector((state) => state.langPreference.langPreference);
+  const isArabic = language === "ar";
 
   const handleAddTask = (event) => {
     event.preventDefault();
@@ -66,7 +70,9 @@ const TasksPage = () => {
           <input
             name="title"
             type="text"
-            placeholder="Create a new todo.."
+            placeholder={
+              isArabic ? "إنشاء ملاحظة جديدة" : "Create a new todo.."
+            }
             className="add-input"
             required
           />
@@ -80,9 +86,9 @@ const TasksPage = () => {
           <Tasks tasks={tasks} />
         </div>
         <div className="below-action-btns">
-          <button>All</button>
-          <button>Active</button>
-          <button>Completed</button>
+          <button>{isArabic ? "الكل" : "All"}</button>
+          <button>{isArabic ? "متبقي" : "Active"}</button>
+          <button>{isArabic ? "منتهي" : "Completed"}</button>
         </div>
       </div>
     </Wrapper>

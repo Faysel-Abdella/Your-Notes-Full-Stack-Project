@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Form, redirect, useNavigate, useNavigation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -39,6 +40,13 @@ const CompletePage = () => {
   const signupConfirmPassword = useSelector(
     (state) => state.signup.confirmPassword
   );
+  const language = useSelector((state) => state.langPreference.langPreference);
+
+  const isArabic = language === "ar";
+
+  useEffect(() => {
+    document.body.classList.toggle("isArabic", isArabic);
+  }, [isArabic]);
 
   const navigate = useNavigate();
   const navigation = useNavigation();
@@ -62,11 +70,20 @@ const CompletePage = () => {
     <Wrapper>
       <div className="signup-container">
         <div className="inside-singup">
-          <h1 className="header-text">Complete Signup</h1>
+          <h1 className="header-text">
+            {isArabic ? "إكمال إنشاء حساب" : "Complete Signup"}
+          </h1>
           <Form method="POST" onSubmit={updateUserName}>
-            <FormRow name="username" type="text" label="Username" />
-            <FormRow name="phone" label="Phone" />
-            <FormRow name="birthDayYear" label="Birthday Year" />
+            <FormRow
+              name="username"
+              type="text"
+              label={isArabic ? "اسم المستخدم" : "Username"}
+            />
+            <FormRow name="phone" label={isArabic ? "رقم الهاتف" : "Phone"} />
+            <FormRow
+              name="birthDayYear"
+              label={isArabic ? "سنة الميلاد" : "Birthday Year"}
+            />
 
             <input name="email" type="hidden" value={signupEmail} />
             <input name="password" type="hidden" value={signupPassword} />
@@ -77,22 +94,30 @@ const CompletePage = () => {
             />
 
             <CtaButton
-              text={` ${isSigning ? "Signing..." : "Complete signup"} `}
+              text={
+                isSigning
+                  ? isArabic
+                    ? "جاري الإنشاء، انتظر"
+                    : "Signing..."
+                  : isArabic
+                  ? "إكمال إنشاء الحساب"
+                  : "Complete signup"
+              }
               Icon={PiArrowRightBold}
               type="submit"
               disabled={isSigning}
             />
             <CtaButton
-              text="Back"
+              text={isArabic ? "للخلف" : "Back"}
               Icon={PiArrowLeftBold}
               type="button"
               onClick={() => navigate("/")}
             />
           </Form>
           <p className="normal-text">
-            Already have an account?{" "}
+            {isArabic ? "  تمتلك حساب بالفعل " : "Already have an account?"}{" "}
             <a className="go-link" href="/login">
-              Login
+              {isArabic ? " تسجيل الدخول " : "Login"}
             </a>
           </p>
         </div>
