@@ -240,9 +240,9 @@ a:active {
   height: 4rem;
 }
 
- .isArabic .image-container .inside-image {
+ /* .isArabic .image-container .inside-image {
   height: 56.4rem !important;
- }
+ } */
 
 .isArabic .top-dashboard {
    flex-direction: row-reverse !important;
